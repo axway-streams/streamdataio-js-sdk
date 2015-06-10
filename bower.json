@@ -1,7 +1,7 @@
 {
   "name": "streamdata-js-sdk",
   "version": "0.0.1-SNAPSHOT",
-  "homepage": "https://github.com/motwin/streamdata-js-sdk",
+  "homepage": "https://github.com/motwin/streamdataio-js-sdk",
   "authors": [
     "Motwin"
   ],
