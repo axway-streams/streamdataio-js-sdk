@@ -18,7 +18,11 @@ var StreamdataEventSource = {
 
 var Logger = {
 
-}
+};
+
+var Preconditions = {
+
+};
 
 var StreamdataError = {
     /**
