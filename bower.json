@@ -1,0 +1,27 @@
+{
+  "name": "streamdata-js-sdk",
+  "version": "0.0.1-SNAPSHOT",
+  "homepage": "https://github.com/motwin/streamdata-js-sdk",
+  "authors": [
+    "Motwin"
+  ],
+  "description": "Javascript SDK for Streamdata.io",
+  "keywords": [
+    "streamdata",
+    "streamdata.io",
+    "push",
+    "sse",
+    "server-sent-event"
+  ],
+  "license": "Apache 2 License",
+  "private": true,
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "eventsource-polyfill": "https://github.com/streamdataio/EventSource.git"
+  },
+  "devDependencies": {}
+}

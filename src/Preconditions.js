@@ -1,0 +1,68 @@
+var Preconditions = (function (Logger) {
+  'use strict';
+
+  return {
+    /**
+     * @memberOf Preconditions#
+     * check if the value is not null
+     * @param {*} value
+     * @param {string} message
+     */
+    checkNotNull: function (value, message) {
+      if (typeof value === 'undefined' || value === null) {
+        if (message) {
+          throw new Error(message);
+        } else {
+          throw new Error('value cannot be null');
+        }
+      }
+      return value;
+    },
+
+    /**
+     * @memberOf Preconditions#
+     * log deprecated warning
+     * @param {string} functionName
+     * @param {string} message
+     */
+    deprecated: function (functionName, message) {
+      this.checkNotNull(functionName, 'functionName cannot be null');
+      this.checkNotNull(message, 'message cannot be null');
+
+      Logger.warn("Deprecated: function '{0}' is deprecated because '{1}'.", functionName, message);
+
+    },
+
+    /**
+     * @memberOf Preconditions#
+     * check is the provided expression is true
+     * @param {*} expression
+     * @param {string} message
+     */
+    checkState: function (expression, message) {
+      if (!expression) {
+        if (message) {
+          throw new Error(message);
+        } else {
+          throw new Error('expression is not valid');
+        }
+      }
+    },
+
+    /**
+     * @memberOf Preconditions#
+     * check is the argument matches the expression
+     * @param {*} expression
+     * @param {string} message
+     */
+    checkArgument: function (expression, message) {
+      if (!expression) {
+        if (message) {
+          throw new Error(message);
+        } else {
+          throw new Error('expression is not valid');
+        }
+      }
+    }
+  };
+})(Logger);
