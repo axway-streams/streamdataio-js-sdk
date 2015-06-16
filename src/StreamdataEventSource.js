@@ -108,7 +108,7 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         var htaccessCredentials = matches ? htaccessCredentials = matches[1] : "";
 
 
-        var urlToEncode = parser.protocol + '//' + htaccessCredentials + parser.hostname + ((parser.pathname.indexOf('/') == 0) ? '' : '/') + parser.pathname + parser.search;
+        var urlToEncode = parser.protocol + '//' + htaccessCredentials + parser.hostname + ((parser.port != '0' && parser.port != '' && parser.port != '80' && parser.port != '443'  ) ? ':' + parser.port : '') + ((parser.pathname.indexOf('/') == 0) ? '' : '/') + parser.pathname + parser.search;
         var signedUrl = authStrategy === null ? urlToEncode : authStrategy['signUrl'](urlToEncode);
 
         var streamDataQueryParams = self._buildStreamDataQueryParams(headers);

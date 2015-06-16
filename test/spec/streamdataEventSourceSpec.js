@@ -18,6 +18,14 @@ describe('StreamdataEventSource.', function () {
       expect(expectedConvertedUrl).toEqual(convertedUrl);
     });
 
+    it('should decorate a url with a specific port and no params', function () {
+          //GIVEN
+          var e = new StreamdataEventSource("http://www.google.fr:9090", "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
+          var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.google.fr:9090/?X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+          var convertedUrl = e._decorate(e._url);
+
+          expect(expectedConvertedUrl).toEqual(convertedUrl);
+    });
 
     it('should decorate a url with params', function () {
       //GIVEN
