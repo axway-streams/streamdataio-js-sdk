@@ -19,7 +19,7 @@ In other words, streamdata.io is the perfect cache to dramatically reduce the ba
 
 
 This Javascript SDK facilitates the usage of streamdata.io.
- 
+
 Follow this quick start guide to easily integrate streamdata.io into your application.
 
 Getting Started
@@ -45,7 +45,7 @@ Create a ```StreamDataEventSource``` object into your JavaScript code.
     var myEventSource = streamdataio.createEventSource("http://mysite.com/myJsonRestService",<app_token>);
 ```
 
-The ```StreamDataEventSource``` is the entry point for establishing a data stream connection to the given URL. 
+The ```StreamDataEventSource``` is the entry point for establishing a data stream connection to the given URL.
 
 It uses an application **token** to identify and authorize the stream connection to be established.
 
@@ -55,7 +55,7 @@ It uses standard HTTP Server-Sent Events to get the data you required through st
 
 If your API requires specific headers, simply pass them as an array on the event source creation, and streamdata.io will forward them to your Information System.
 
-An optional ```headers``` parameter can be passed to the ```createEventSource``` method. 
+An optional ```headers``` parameter can be passed to the ```createEventSource``` method.
 
 It must be an array with the following structure:
 ```
@@ -71,7 +71,7 @@ Here is an example to add a Basic authorization header to your target API call:
 
     // add whatever header required by your API
     var headers = ['Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='];
-    
+
     var myEventSource = streamdataio.createEventSource(url,<app_token>, headers);
 ```
 
@@ -108,7 +108,7 @@ Examples
 
 ## 1. Simple Javascript source code integration
 
-Here is a complete example of how to use the different callbacks of the streamdata.io SDK. 
+Here is a complete example of how to use the different callbacks of the streamdata.io SDK.
 
 You can copy/paste this piece of code in a HTML page and test it.
 
@@ -126,14 +126,14 @@ Each callback will be described in further details in the Public API JavaScript 
 (function() {
   var eventSource = null;
   var stocks = [];
-  
+
   function connect() {
     // REPLACE WITH YOUR OWN TOKEN HERE
     var appToken = "NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1";
-  
+
     // create the StreamdataEventSource Object
     eventSource = streamdataio.createEventSource("http://myRestservice.com/stocks",appToken);
-  
+
     eventSource
      .onOpen(function() {
        console.log("streamdata Event Source connected.")
@@ -151,12 +151,12 @@ Each callback will be described in further details in the Public API JavaScript 
        // displays the error message
        console.log(error.getMessage());
      });
-  
+
     // open the data stream to the REST service through streamdata.io proxy
     eventSource.open();
-  
+
   };
-  
+
   function disconnect() {
     if (eventSource) {
       eventSource.close();
@@ -183,21 +183,16 @@ A simple jQuery integration of market data with streamdata.io SDK.
 
 ### 2.2 Angular.js example
 
-The same market data example using Angular.js 
+The same market data example using Angular.js
 
 <a href="https://github.com/streamdataio/streamdataio-js/tree/master/stockmarket-angular" target="_blank">Stock Market Angular</a>
 
-### 2.3 Twitter example
-
-A sample to demonstrate how to integrate a twitter time line with streamdata.io SDK.
-
-<a href="https://github.com/streamdataio/streamdataio-js/tree/master/twitter" target="_blank">Twitter</a>
 
 Security
 ========
 
 ## 1. TLS Encryption
-streamdata.io proxy uses Transport Layer Security (TLS) as a default to encrypt messages while in transport across the Internet. 
+streamdata.io proxy uses Transport Layer Security (TLS) as a default to encrypt messages while in transport across the Internet.
 
 **Recommendation**:
 
@@ -208,11 +203,11 @@ Using TLS ensures that client messages are protected when being sent to and from
 ## 2. Authentication with Token
 
 Running an application in production through streamdata.io proxy requires an authentication mechanism.
- 
+
 When registering on <a href="http://streamdata.io" target="_blank">streamdata.io web site</a>, you'll be provided with a unique **token** for your application and a **private key**.
- 
+
 This allows streamdata.io proxy to identify that a specific request comes from your application.
- 
+
 This **token** must be provided to the SDK in order to be able to use the streamdata.io proxy.
 
 ```javascript
@@ -223,14 +218,14 @@ This **token** must be provided to the SDK in order to be able to use the stream
 ## 3. Authentication with signature
 
 streamdata.io SDK offers an optional Hash-based Message Authentication (HMAC) mechanism to enhance your requests security.
-  
+
 In order to use it, you'll first need to add streamdataio_auth javascript auth library to your project :
 
 
 ```html
 <script src="/js/streamdataio-auth.min.js"></script>
 ```
-  
+
 You can then use a signatureStrategy object when creating your StreamDataEventSource as follow:
 
 
@@ -247,11 +242,9 @@ You can then use a signatureStrategy object when creating your StreamDataEventSo
 **Important Note**:
 
 Your signatureStrategy is built using your **token** and **private key**.
- 
+
 The signatureStrategy will generate a signature specific to your data stream connection request.
 
 This signature will be validated by streamdata.io proxy before authorizing your request to go through it.
 
 **Your private key must be kept secret**.
-
-
