@@ -25,24 +25,49 @@ Follow this quick start guide to easily integrate streamdata.io into your applic
 Getting Started
 ===============
 
+## 1. Build the SDK from source
 
-## 1. Add SDK to your application
+#1.1 Prerequisites
+
+Having node.js, npm, bower and gulp installed on you computer.
+
+## 1.2 Build
+
+Then check out the project from git and simply run the following command lines to build the sdk file from source:
+
+```
+npm update 
+```
+This will install node.js components for the build.
+
+```
+bower update
+```
+This will install bower dependencies for the build.
+
+```
+gulp build
+```
+this will generate streamdataio.js and streamdataio.min.js files in the dist/ folder.
+
+
+## 2. Add SDK to your application
 
 Add reference to the streamdataio.min.js file in your application code. Usually this is done by using a script html tag into your main page:
 
 ```html
-<script src="/js/streamdataio.min.js"></script>
+<script src="streamdataio.min.js"></script>
 ```
 
 By doing this, you access in your JavaScript code to the ```streamdataio``` object which is the central point of all streamdata.io SDK API.
 
 
-## 2. Use streamdata.io to connect to your API
+## 3. Use streamdata.io to connect to your API
 
 Create a ```StreamDataEventSource``` object into your JavaScript code.
 
 ```javascript
-    var myEventSource = streamdataio.createEventSource("http://mysite.com/myJsonRestService",<app_token>);
+    var myEvent = streamdataio.createEventSource("http://mysite.com/myRestService",<app_token>);
 ```
 
 The ```StreamDataEventSource``` is the entry point for establishing a data stream connection to the given URL.
@@ -75,7 +100,7 @@ Here is an example to add a Basic authorization header to your target API call:
     var myEventSource = streamdataio.createEventSource(url,<app_token>, headers);
 ```
 
-## 3. Handle data reception
+## 4. Handle data reception
 
 streamdata.io SDK handles data from the targeted REST service as JSON objects.
 
@@ -97,7 +122,7 @@ You can define your callback functions as follows:
     });
 ```
 
-## 4. Start receiving data
+## 5. Start receiving data
 
 ```javascript
     myEventSource.open();
@@ -117,7 +142,7 @@ Each callback will be described in further details in the Public API JavaScript 
 
 ```javascript
 <!-- include streamdataio library -->
-<script src="/js/streamdataio.min.js" />
+<script src="streamdataio.min.js" />
 
 <!-- use json-patch-duplex library for applying patches -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js" />
