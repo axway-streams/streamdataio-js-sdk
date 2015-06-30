@@ -22,11 +22,12 @@ var EventSource = {
     "CONNECTING": {},
     "OPEN": {},
     "CLOSED": {},
+    "isPolyfill": {},
     "toString": function () {},
-    loggingEnabled: {},
-    loggingPrefix: {},
-    interval: {},
-    bufferSizeLimit: {}
+    "loggingEnabled": {},
+    "loggingPrefix": {},
+    "interval": {},
+    "bufferSizeLimit": {}
 };
 
 var StreamdataEventSource = {
@@ -34,7 +35,8 @@ var StreamdataEventSource = {
         "HOST" : {},
         "PORT" : {},
         "PROTOCOL" : {}
-    }
+    },
+    "getPolyfill": {}
 };
 
 var Logger = {

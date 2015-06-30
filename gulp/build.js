@@ -48,13 +48,12 @@ gulp.task('obfuscate', function (cb) {
 
     var minifySources = [paths.libsDistFile].concat(paths.sources);
     var pkg = require('../package.json');
-    var licenseText = pkg.licenseText.join("\n");
     var banner = ['/** <%= pkg.name %> - <%= pkg.description %>',
         ' * @version v<%= pkg.version %>',
         ' * rev: <%= revision %>',
         ' */',
         ''].join('\n');
-    var tag = gitRevision("tag");
+    var tag = gitRevision("long");
     var pipeline =
             gulp.src(minifySources)
                 .pipe(debug())
@@ -67,7 +66,7 @@ gulp.task('obfuscate', function (cb) {
                         create_source_map: path.join(paths.dist, 'streamdataio.min.js.map')
                     }
                 ))
-                .pipe(header(banner, {pkg: pkg, licenseText: licenseText, revision: tag}))
+                .pipe(header(banner, {pkg: pkg, revision: tag}))
                 .pipe(gulp.dest(paths.dist))
         ;
 
@@ -79,7 +78,7 @@ gulp.task('buildScript', function (cb) {
     var sources = libsAndSources();
     var pkg = require('../package.json');
     var licenseText = pkg.licenseText.join("\n");
-    var tag = gitRevision("tag");
+    var tag = gitRevision("long");
 
     var banner = ['/**',
         ' * Copyrights <%= pkg.copyrights %> - <%= pkg.author %>',

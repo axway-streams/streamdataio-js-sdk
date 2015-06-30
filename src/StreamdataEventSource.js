@@ -174,6 +174,21 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
     self.isEmpty = function (str) {
         return (!str || 0 === str.length);
     };
+
+    self.getPolyfill = function() {
+        // detect what kind of EventSource we have
+        var polyfill = _sse.isPolyfill;
+
+        switch (polyfill) {
+
+            case "XHR":
+            case "IE_8-9":
+                return self._sse;
+            case undefined:
+            default:
+                return null;
+        }
+    }
 }
 
 StreamdataEventSource.prototype = {
