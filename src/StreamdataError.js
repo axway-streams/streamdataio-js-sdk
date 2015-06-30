@@ -31,10 +31,10 @@ function StreamdataError(type, message, status, source, isFatal) {
     this._fatal   = isFatal || false;
     this._status  = status;
 
-    Exporter.exportProperty(this, "source", this._source);
-    Exporter.exportProperty(this, "type", this._type);
-    Exporter.exportProperty(this, "message", this._message);
-    Exporter.exportProperty(this, "status", this._status);
+    Exporter.exportProperty(this, 'source', this._source);
+    Exporter.exportProperty(this, 'type', this._type);
+    Exporter.exportProperty(this, 'message', this._message);
+    Exporter.exportProperty(this, 'status', this._status);
 
 }
 
@@ -52,14 +52,14 @@ StreamdataError.prototype = {
     * @return {boolean} true if error is from server side.
     */
     isServer: function() {
-        return this._source == "server";
+        return this._source == 'server';
     },
     /**
     * @memberOf StreamdataError#
     * @return {boolean} true if error is from client side.
     */
     isClient: function() {
-        return this._source == "client";
+        return this._source == 'client';
     },
     /**
     * @memberOf StreamdataError#

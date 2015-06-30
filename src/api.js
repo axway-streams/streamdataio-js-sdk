@@ -57,7 +57,7 @@ StreamdataError.prototype.isClient = function() { return false; };
  * Returns the message that explains the cause of the error.
  * @return {string} the message that explains the cause of the error.
  */
-StreamdataError.prototype.getMessage = function() { return ""; };
+StreamdataError.prototype.getMessage = function() { return ''; };
 
 /**
  * Returns the error object.
@@ -88,9 +88,9 @@ StreamdataError.prototype.getStatus = function() { return null; };
  * // setup headers
  * var headers = [];
  * // setup signatureStrategy
- * var signatureStrategy = AuthStrategy.newSignatureStrategy("NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1","NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi");
+ * var signatureStrategy = AuthStrategy.newSignatureStrategy('NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1','NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi');
  * // instantiate an eventSource
- * var eventSource = streamdataio.createEventSource("http://myRestservice.com/stocks","NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1",headers,signatureStrategy);
+ * var eventSource = streamdataio.createEventSource('http://myRestservice.com/stocks','NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1',headers,signatureStrategy);
  *
  * @constructor
  */
@@ -208,9 +208,9 @@ function Streamdata() {}
 * // setup headers
 * var headers = [];
 * // setup signatureStrategy
-* var signatureStrategy = AuthStrategy.newSignatureStrategy("NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1","NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi");
+* var signatureStrategy = AuthStrategy.newSignatureStrategy('NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1','NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi');
 * // instantiate an eventSource
-* var eventSource = streamdataio.createEventSource("http://myRestservice.com/stocks","NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1",headers,signatureStrategy);
+* var eventSource = streamdataio.createEventSource('http://myRestservice.com/stocks','NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1',headers,signatureStrategy);
 *
 * </code></pre>
 * @returns {StreamDataEventSource}

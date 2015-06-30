@@ -1,6 +1,6 @@
 {
   "name": "streamdata-js-sdk",
-  "version": "0.0.3-SNAPSHOT",
+  "version": "1.0.1-SNAPSHOT",
   "description": "Javascript SDK for Streamdata.io",
   "copyrights": " 2015",
   "scripts": {
@@ -68,7 +68,8 @@
     "run-sequence": "^1.0.2",
     "gulp-closurecompiler": "^0.1.0",
     "ink-docstrap": "^0.5.2",
-    "gulp-shell": "^0.3.0"
+    "gulp-shell": "^0.3.0",
+    "git-revision": "^0.0.1"
   },
   "dependencies": {
   }

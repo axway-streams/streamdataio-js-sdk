@@ -55,7 +55,7 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
             self._sse = new EventSource(decoratedUrl);
 
             self._sse.addEventListener('open', function (event) {
-                Logger.debug('SSE Stream Opened to ' + self._url + "event: " + JSON.stringify(event));
+                Logger.debug('SSE Stream Opened to ' + self._url + 'event: ' + JSON.stringify(event));
                 self._isConnected = true;
                 self._openListeners.fire();
             });
@@ -104,7 +104,7 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         // get http access crendentials if specified
         var credentialsRegex = /\/\/(.*@)/g;
         var matches = credentialsRegex.exec(url);
-        var htaccessCredentials = matches ? htaccessCredentials = matches[1] : "";
+        var htaccessCredentials = matches ? htaccessCredentials = matches[1] : '';
 
 
         var urlToEncode = parser.protocol + '//' + htaccessCredentials + parser.hostname + ((parser.port != '0' && parser.port != '' && parser.port != '80' && parser.port != '443'  ) ? ':' + parser.port : '') + ((parser.pathname.indexOf('/') == 0) ? '' : '/') + parser.pathname + parser.search;
@@ -125,7 +125,7 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
             + self.streamdataConfig.HOST + (self.isEmpty(self.streamdataConfig.PORT) ? '' : ':') + self.streamdataConfig.PORT
             + '/' + signedUrl + queryParams;
 
-        Logger.debug("converted url :" + streamdataUrl);
+        Logger.debug('converted url :' + streamdataUrl);
 
         return streamdataUrl;
     };

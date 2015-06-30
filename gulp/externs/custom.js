@@ -22,7 +22,11 @@ var EventSource = {
     "CONNECTING": {},
     "OPEN": {},
     "CLOSED": {},
-    "toString": function () {}
+    "toString": function () {},
+    loggingEnabled: {},
+    loggingPrefix: {},
+    interval: {},
+    bufferSizeLimit: {}
 };
 
 var StreamdataEventSource = {
