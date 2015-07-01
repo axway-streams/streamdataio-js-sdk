@@ -46,16 +46,23 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         'message': 'An error occured. Please check your console logs for more details.',
         'source': 'server'
     };
+    self._bufferSizeLimit = 1024 * 1024;;
+    self._loggingEnabled = false;
+    self._polyfillOptions = {bufferSizeLimit: self._bufferSizeLimit, loggingEnabled: self._loggingEnabled};
 
     self.open = function () {
         Preconditions.checkNotNull(self._url, 'url cannot be null');
         self.close();
         var decoratedUrl = self._decorate(self._url, self._headers);
         if (decoratedUrl) {
-            self._sse = new EventSource(decoratedUrl);
+            if (self._isPolyFill()){
+                self._sse = new EventSource(decoratedUrl,self._polyfillOptions);
+            } else {
+                self._sse = new EventSource(decoratedUrl);
+            }
 
             self._sse.addEventListener('open', function (event) {
-                Logger.debug('SSE Stream Opened to ' + self._url + "event: " + JSON.stringify(event));
+                Logger.debug('SSE Stream Opened to ' + self._url + 'event: ' + JSON.stringify(event));
                 self._isConnected = true;
                 self._openListeners.fire();
             });
@@ -104,7 +111,7 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         // get http access crendentials if specified
         var credentialsRegex = /\/\/(.*@)/g;
         var matches = credentialsRegex.exec(url);
-        var htaccessCredentials = matches ? htaccessCredentials = matches[1] : "";
+        var htaccessCredentials = matches ? htaccessCredentials = matches[1] : '';
 
 
         var urlToEncode = parser.protocol + '//' + htaccessCredentials + parser.hostname + ((parser.port != '0' && parser.port != '' && parser.port != '80' && parser.port != '443'  ) ? ':' + parser.port : '') + ((parser.pathname.indexOf('/') == 0) ? '' : '/') + parser.pathname + parser.search;
@@ -125,7 +132,7 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
             + self.streamdataConfig.HOST + (self.isEmpty(self.streamdataConfig.PORT) ? '' : ':') + self.streamdataConfig.PORT
             + '/' + signedUrl + queryParams;
 
-        Logger.debug("converted url :" + streamdataUrl);
+        Logger.debug('converted url :' + streamdataUrl);
 
         return streamdataUrl;
     };
@@ -174,6 +181,42 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
     self.isEmpty = function (str) {
         return (!str || 0 === str.length);
     };
+
+    self.setBufferSizeLimit = function(aSize) {
+        Preconditions.checkNotNull(aSize, 'buffer size cannot be null');
+        Preconditions.checkArgument(self._isPolyFill(),"Buffer size cannot be set on native EventSource.");
+
+        self._polyfillOptions.bufferSizeLimit = aSize;
+    };
+
+    self.enableLogging = function() {
+        Preconditions.checkArgument(self._isPolyFill(),"logging cannot be enabled on native EventSource.");
+        self._polyfillOptions.loggingEnabled = true;
+    };
+
+    self.disableLogging = function() {
+        Preconditions.checkArgument(self._isPolyFill(),"logging cannot be disabled on native EventSource.");
+        self._polyfillOptions.loggingEnabled = false;
+    };
+
+    self._isPolyFill = function(){
+        // detect what kind of EventSource we have
+        var isPolyfill = EventSource.isPolyfill;
+
+        switch (isPolyfill) {
+            case undefined:
+                return false;
+
+            case "XHR":
+                return true;
+
+            case "IE_8-9":
+                return true;
+
+            default:
+                return false;
+        }
+    }
 }
 
 StreamdataEventSource.prototype = {

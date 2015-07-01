@@ -26,7 +26,7 @@ var Exporter = (function() {
      * @param {*} object
      */
     exportSymbol: function(owner, publicPath, object) {
-      var tokens = publicPath.split(".");
+      var tokens = publicPath.split('.');
       var target = owner;
       for (var i = 0; i < tokens.length - 1; i++) {
         target = target[tokens[i]];

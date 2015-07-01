@@ -1,6 +1,6 @@
 {
   "name": "streamdata-js-sdk",
-  "version": "0.0.1-SNAPSHOT",
+  "version": "1.0.1-SNAPSHOT",
   "homepage": "https://github.com/motwin/streamdataio-js-sdk",
   "authors": [
     "Motwin"
@@ -21,7 +21,7 @@
     "test"
   ],
   "dependencies": {
-    "eventsource-polyfill": "https://github.com/streamdataio/EventSource.git"
+    "eventsource-polyfill": "https://github.com/streamdataio/EventSource.git#v1.0.0"
   },
   "devDependencies": {}
 }
