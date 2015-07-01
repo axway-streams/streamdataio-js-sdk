@@ -21,7 +21,7 @@
     "test"
   ],
   "dependencies": {
-    "eventsource-polyfill": "https://github.com/streamdataio/EventSource.git"
+    "eventsource-polyfill": "https://github.com/streamdataio/EventSource.git#v1.0.0"
   },
   "devDependencies": {}
 }

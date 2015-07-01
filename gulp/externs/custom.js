@@ -27,7 +27,10 @@ var EventSource = {
     "loggingEnabled": {},
     "loggingPrefix": {},
     "interval": {},
-    "bufferSizeLimit": {}
+    "bufferSizeLimit": {},
+    "setBufferSizeLimit": {},
+    "disableLogging": {},
+    "enableLogging": {}
 };
 
 var StreamdataEventSource = {

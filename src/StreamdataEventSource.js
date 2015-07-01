@@ -46,13 +46,20 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         'message': 'An error occured. Please check your console logs for more details.',
         'source': 'server'
     };
+    self._bufferSizeLimit = 1024 * 1024;;
+    self._loggingEnabled = false;
+    self._polyfillOptions = {bufferSizeLimit: self._bufferSizeLimit, loggingEnabled: self._loggingEnabled};
 
     self.open = function () {
         Preconditions.checkNotNull(self._url, 'url cannot be null');
         self.close();
         var decoratedUrl = self._decorate(self._url, self._headers);
         if (decoratedUrl) {
-            self._sse = new EventSource(decoratedUrl);
+            if (self._isPolyFill()){
+                self._sse = new EventSource(decoratedUrl,self._polyfillOptions);
+            } else {
+                self._sse = new EventSource(decoratedUrl);
+            }
 
             self._sse.addEventListener('open', function (event) {
                 Logger.debug('SSE Stream Opened to ' + self._url + 'event: ' + JSON.stringify(event));
@@ -175,18 +182,39 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         return (!str || 0 === str.length);
     };
 
-    self.getPolyfill = function() {
-        // detect what kind of EventSource we have
-        var polyfill = _sse.isPolyfill;
+    self.setBufferSizeLimit = function(aSize) {
+        Preconditions.checkNotNull(aSize, 'buffer size cannot be null');
+        Preconditions.checkArgument(self._isPolyFill(),"Buffer size cannot be set on native EventSource.");
 
-        switch (polyfill) {
+        self._polyfillOptions.bufferSizeLimit = aSize;
+    };
+
+    self.enableLogging = function() {
+        Preconditions.checkArgument(self._isPolyFill(),"logging cannot be enabled on native EventSource.");
+        self._polyfillOptions.loggingEnabled = true;
+    };
+
+    self.disableLogging = function() {
+        Preconditions.checkArgument(self._isPolyFill(),"logging cannot be disabled on native EventSource.");
+        self._polyfillOptions.loggingEnabled = false;
+    };
+
+    self._isPolyFill = function(){
+        // detect what kind of EventSource we have
+        var isPolyfill = EventSource.isPolyfill;
+
+        switch (isPolyfill) {
+            case undefined:
+                return false;
 
             case "XHR":
+                return true;
+
             case "IE_8-9":
-                return self._sse;
-            case undefined:
+                return true;
+
             default:
-                return null;
+                return false;
         }
     }
 }
