@@ -69,7 +69,10 @@
     "gulp-closurecompiler": "^0.1.0",
     "ink-docstrap": "^0.5.2",
     "gulp-shell": "^0.3.0",
-    "git-revision": "^0.0.1"
+    "gulp-git": "^1.2.4",
+    "git-revision": "^0.0.1",
+    "gulp-util": "^3.0.4",
+    "gulp-plumber": "^1.0.1"
   },
   "dependencies": {
   }
