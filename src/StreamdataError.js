@@ -80,6 +80,7 @@ StreamdataError.prototype = {
      * @return {(Object|undefined)} the type value of the error object from the server (error object sent by the server) or from the client (Javascript exception thrown).
      */
     getType: function() {
+
         return this._type;
     }
 

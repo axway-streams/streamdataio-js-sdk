@@ -21,15 +21,15 @@ var gulp = require("gulp");
 var concat = require('gulp-concat');
 var sequence = require('run-sequence');
 var debug = require('gulp-debug');
-var uglify = require('gulp-uglifyjs');
 var path = require('path');
 var gulpCC = require("gulp-closurecompiler");
 var jsdoc = require("gulp-jsdoc");
-var shell = require('gulp-shell');
 var header = require('gulp-header');
 var gitRevision = require('git-revision');
+var gutil = require('gulp-util');
 
 var paths = gulp.config.paths;
+
 
 gulp.task('minify', function (cb) {
     var libs = paths.libs;
@@ -44,18 +44,19 @@ gulp.task('minify', function (cb) {
         .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('obfuscate', function (cb) {
 
+function obfuscate(withGit) {
     var minifySources = [paths.libsDistFile].concat(paths.sources);
     var pkg = require('../package.json');
     var banner = ['/** <%= pkg.name %> - <%= pkg.description %>',
         ' * @version v<%= pkg.version %>',
-        ' * rev: <%= revision %>',
+        (withGit ? ' * rev: <%= revision %>' : ' *'),
         ' */',
         ''].join('\n');
-    var tag = gitRevision("long");
+
     var pipeline =
             gulp.src(minifySources)
+
                 .pipe(debug())
                 .pipe(gulpCC({
                         fileName: 'streamdataio.min.js'
@@ -66,26 +67,38 @@ gulp.task('obfuscate', function (cb) {
                         create_source_map: path.join(paths.dist, 'streamdataio.min.js.map')
                     }
                 ))
-                .pipe(header(banner, {pkg: pkg, revision: tag}))
+                .pipe(header(banner, {pkg: pkg, revision: (withGit ? gitRevision("long"): pkg.version)}))
                 .pipe(gulp.dest(paths.dist))
         ;
 
     return pipeline;
+
+}
+
+
+gulp.task('obfuscate', function (cb) {
+
+    return obfuscate(false);
+
 });
 
+gulp.task('obfuscateGit', function (cb) {
 
-gulp.task('buildScript', function (cb) {
+    return obfuscate(true);
+
+});
+
+function buildScript(withGit){
     var sources = libsAndSources();
     var pkg = require('../package.json');
     var licenseText = pkg.licenseText.join("\n");
-    var tag = gitRevision("long");
 
     var banner = ['/**',
         ' * Copyrights <%= pkg.copyrights %> - <%= pkg.author %>',
         ' *',
         ' * <%= pkg.name %> - <%= pkg.description %>',
         ' * @version v<%= pkg.version %>',
-        ' * rev: <%= revision %>',
+        (withGit ? ' * rev: <%= revision %>' : ' *'),
         ' * @link <%= pkg.homepage %>',
         ' *',
         ' * @license <%= pkg.license %>',
@@ -95,15 +108,32 @@ gulp.task('buildScript', function (cb) {
         ''].join('\n');
 
     var pipeline =
-            gulp.src(sources)
-                .pipe(debug())
-                .pipe(concat('streamdataio.js'))
-                .pipe(header(banner, {pkg: pkg, licenseText: licenseText, revision: tag}))
-                .pipe(gulp.dest(paths.dist))
-        ;
+        gulp.src(sources)
+            .pipe(debug())
+            .pipe(concat('streamdataio.js'))
+            .pipe(header(banner, {pkg: pkg, licenseText: licenseText, revision: (withGit ? gitRevision("long") : pkg.version) }))
+            .pipe(gulp.dest(paths.dist));
+
     return pipeline;
 
+
+}
+
+
+gulp.task('buildScript', function (cb) {
+
+    return buildScript(false);
+
+
 });
+
+
+gulp.task('buildScriptGit', function (cb) {
+
+    return buildScript(true);
+
+});
+
 
 gulp.task('doc', function (cb) {
 
@@ -134,8 +164,12 @@ gulp.task('build', function (callback) {
     sequence('clean', 'buildScript', 'minify', 'obfuscate', 'doc', callback);
 });
 
-gulp.task('buildDev', ['watch', 'build'], function () {
 
+gulp.task('buildGit', function (callback) {
+    sequence('clean', 'buildScriptGit', 'minify', 'obfuscateGit', 'doc', callback);
+});
+
+gulp.task('buildDev', ['watch', 'build'], function (callback) {
 });
 
 function libsAndSources() {

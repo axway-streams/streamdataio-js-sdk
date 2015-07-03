@@ -27,10 +27,7 @@ var EventSource = {
     "loggingEnabled": {},
     "loggingPrefix": {},
     "interval": {},
-    "bufferSizeLimit": {},
-    "setBufferSizeLimit": {},
-    "disableLogging": {},
-    "enableLogging": {}
+    "bufferSizeLimit": {}
 };
 
 var StreamdataEventSource = {
@@ -39,7 +36,10 @@ var StreamdataEventSource = {
         "PORT" : {},
         "PROTOCOL" : {}
     },
-    "getPolyfill": {}
+    "polyfillOptions": {
+        "bufferSizeLimit": {},
+        "loggingEnabled": {}
+    }
 };
 
 var Logger = {

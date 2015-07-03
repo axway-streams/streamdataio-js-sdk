@@ -46,17 +46,18 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         'message': 'An error occured. Please check your console logs for more details.',
         'source': 'server'
     };
-    self._bufferSizeLimit = 1024 * 1024;;
+    self._bufferSizeLimit = 1024 * 1024;
     self._loggingEnabled = false;
-    self._polyfillOptions = {bufferSizeLimit: self._bufferSizeLimit, loggingEnabled: self._loggingEnabled};
+    self.polyfillOptions = {bufferSizeLimit: self._bufferSizeLimit, loggingEnabled: self._loggingEnabled};
 
     self.open = function () {
         Preconditions.checkNotNull(self._url, 'url cannot be null');
         self.close();
         var decoratedUrl = self._decorate(self._url, self._headers);
         if (decoratedUrl) {
+
             if (self._isPolyFill()){
-                self._sse = new EventSource(decoratedUrl,self._polyfillOptions);
+                self._sse = new EventSource(decoratedUrl,self.polyfillOptions);
             } else {
                 self._sse = new EventSource(decoratedUrl);
             }
@@ -147,7 +148,6 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         return headersParams;
     };
 
-
     self._buildHeadersAsQueryParams = function (headers) {
         headers = headers || [];
 
@@ -155,7 +155,6 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
             return 'X-Sd-Header=' + encodeURIComponent(item);
         });
     };
-
 
     self._buildErrorMessage = function (event, isFatal) {
         Preconditions.checkNotNull(event, 'event cannot be null');
@@ -180,23 +179,6 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
 
     self.isEmpty = function (str) {
         return (!str || 0 === str.length);
-    };
-
-    self.setBufferSizeLimit = function(aSize) {
-        Preconditions.checkNotNull(aSize, 'buffer size cannot be null');
-        Preconditions.checkArgument(self._isPolyFill(),"Buffer size cannot be set on native EventSource.");
-
-        self._polyfillOptions.bufferSizeLimit = aSize;
-    };
-
-    self.enableLogging = function() {
-        Preconditions.checkArgument(self._isPolyFill(),"logging cannot be enabled on native EventSource.");
-        self._polyfillOptions.loggingEnabled = true;
-    };
-
-    self.disableLogging = function() {
-        Preconditions.checkArgument(self._isPolyFill(),"logging cannot be disabled on native EventSource.");
-        self._polyfillOptions.loggingEnabled = false;
     };
 
     self._isPolyFill = function(){
