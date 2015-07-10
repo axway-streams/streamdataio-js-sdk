@@ -284,4 +284,4 @@ To do so, you can use the X-Sd-Compress header this way:
 ```javascript
 X-Sd-Compress: true
 ```
-The default behavior is NOT to use compression.
+The default behavior is NO compression.
