@@ -273,3 +273,15 @@ The signatureStrategy will generate a signature specific to your data stream con
 This signature will be validated by streamdata.io proxy before authorizing your request to go through it.
 
 **Your private key must be kept secret**.
+
+Compression
+========
+
+Server-Sent event flow can be compressed on demand using **gzip** or **deflate** methods.
+
+To do so, you can use the X-Sd-Compress header this way:
+
+```javascript
+X-Sd-Compress: true
+```
+The default behavior is NOT to use compression.
