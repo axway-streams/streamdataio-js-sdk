@@ -109,13 +109,11 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         var parser = document.createElement('a');
         parser.href = url;
 
-        // get http access crendentials if specified
-        var credentialsRegex = /\/\/(.*@)/g;
-        var matches = credentialsRegex.exec(url);
-        var htaccessCredentials = matches ? htaccessCredentials = matches[1] : '';
+        // handle the userinfo (see https://en.wikipedia.org/wiki/URI_scheme#Examples)
+        var endIndex = url.indexOf(parser.hostname);
+        var userInfo = url.substring(parser.protocol.length + 2, endIndex);
 
-
-        var urlToEncode = parser.protocol + '//' + htaccessCredentials + parser.hostname + ((parser.port != '0' && parser.port != '' && parser.port != '80' && parser.port != '443'  ) ? ':' + parser.port : '') + ((parser.pathname.indexOf('/') == 0) ? '' : '/') + parser.pathname + parser.search;
+        var urlToEncode = parser.protocol + '//' + userInfo + parser.hostname + ((parser.pathname.indexOf('/') == 0) ? '' : '/') + parser.pathname + parser.search;
         var signedUrl = authStrategy === null ? urlToEncode : authStrategy['signUrl'](urlToEncode);
 
         var streamDataQueryParams = self._buildStreamDataQueryParams(headers);

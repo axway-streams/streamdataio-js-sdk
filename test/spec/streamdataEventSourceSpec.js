@@ -3,12 +3,12 @@
 describe('StreamdataEventSource.', function () {
 
   describe('CheckDecorateDecoratesURLs', function() {
-  
+
       beforeEach(function() {
           delete streamdataio.Pk;
           delete streamdataio.pk;
       });
-      
+
     it('should decorate a simple url with no params', function () {
       //GIVEN
       var e = new StreamdataEventSource("http://www.google.fr", "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
@@ -16,15 +16,6 @@ describe('StreamdataEventSource.', function () {
       var convertedUrl = e._decorate(e._url);
 
       expect(expectedConvertedUrl).toEqual(convertedUrl);
-    });
-
-    it('should decorate a url with a specific port and no params', function () {
-          //GIVEN
-          var e = new StreamdataEventSource("http://www.google.fr:9090", "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
-          var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.google.fr:9090/?X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
-          var convertedUrl = e._decorate(e._url);
-
-          expect(expectedConvertedUrl).toEqual(convertedUrl);
     });
 
     it('should decorate a url with params', function () {
@@ -36,6 +27,37 @@ describe('StreamdataEventSource.', function () {
 
       expect(expectedConvertedUrl).toEqual(convertedUrl);
     });
+
+    it('should decorate a url with userinfo', function () {
+      //GIVEN
+      var e = new StreamdataEventSource("http://john:doe@www.google.fr?toto=1",  "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://john:doe@www.google.fr/?toto=1&X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+
+      var convertedUrl = e._decorate(e._url);
+
+      expect(expectedConvertedUrl).toEqual(convertedUrl);
+    });
+
+    it('should decorate a url with userinfo and query param with @', function () {
+      //GIVEN
+      var e = new StreamdataEventSource("http://john:doe@www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_",  "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://john:doe@www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_&X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+
+      var convertedUrl = e._decorate(e._url);
+
+      expect(expectedConvertedUrl).toEqual(convertedUrl);
+    });
+
+    it('should decorate a url with params that contains an @', function () {
+      //GIVEN
+      var e = new StreamdataEventSource("http://www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_",  "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_&X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+
+      var convertedUrl = e._decorate(e._url);
+
+      expect(expectedConvertedUrl).toEqual(convertedUrl);
+    });
+
   });
 
   describe('ChecklistenersCallbacks', function() {
