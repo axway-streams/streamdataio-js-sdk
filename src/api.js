@@ -182,6 +182,17 @@ StreamdataEventSource.prototype.onPatch = function(callback) { return this; };
 StreamdataEventSource.prototype.onMonitor = function(callback) { return this; };
 
 /**
+ * <p>check the connection status of the StreamdataEventSource.</p>
+ *
+ * @example
+ * if (eventSource.isConnected()) {
+ *   // perform required action
+ * };
+ * @returns true if {StreamdataEventSource} is connected, false otherwise.
+ */
+StreamdataEventSource.prototype.isConnected = function() { return this; };
+
+/**
  * <p> streamdata.io sdk provides a way to connect to a remote server and monitor the connection state.
  * <p>A singleton instance is provided as a <code>streamdataio</code> global variable and  gives access to the entire streamdata.io SDK API.</p>
  * Connecting is achieved with the call to <code>streamdataio.createEventSource(url)</code>.
