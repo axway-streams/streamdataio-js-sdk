@@ -11,8 +11,8 @@ describe('StreamdataEventSource.', function () {
 
     it('should decorate a simple url with no params', function () {
       //GIVEN
-      var e = new StreamdataEventSource("http://www.google.fr", "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
-      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.google.fr/?X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+      var e = new StreamdataEventSource("http://www.google.fr", "someRandomExtraLongDummyToken");
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.google.fr/?X-Sd-Token=someRandomExtraLongDummyToken";
       var convertedUrl = e._decorate(e._url);
 
       expect(expectedConvertedUrl).toEqual(convertedUrl);
@@ -20,8 +20,8 @@ describe('StreamdataEventSource.', function () {
 
     it('should decorate a url with params', function () {
       //GIVEN
-      var e = new StreamdataEventSource("http://www.google.fr?toto=1",  "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
-      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.google.fr/?toto=1&X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+      var e = new StreamdataEventSource("http://www.google.fr?toto=1",  "someRandomExtraLongDummyToken");
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.google.fr/?toto=1&X-Sd-Token=someRandomExtraLongDummyToken";
 
       var convertedUrl = e._decorate(e._url);
 
@@ -30,8 +30,8 @@ describe('StreamdataEventSource.', function () {
 
     it('should decorate a url with userinfo', function () {
       //GIVEN
-      var e = new StreamdataEventSource("http://john:doe@www.google.fr?toto=1",  "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
-      var expectedConvertedUrl = "https://streamdata.motwin.net/http://john:doe@www.google.fr/?toto=1&X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+      var e = new StreamdataEventSource("http://john:doe@www.google.fr?toto=1",  "someRandomExtraLongDummyToken");
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://john:doe@www.google.fr/?toto=1&X-Sd-Token=someRandomExtraLongDummyToken";
 
       var convertedUrl = e._decorate(e._url);
 
@@ -40,8 +40,8 @@ describe('StreamdataEventSource.', function () {
 
     it('should decorate a url with userinfo and query param with @', function () {
       //GIVEN
-      var e = new StreamdataEventSource("http://john:doe@www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_",  "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
-      var expectedConvertedUrl = "https://streamdata.motwin.net/http://john:doe@www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_&X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+      var e = new StreamdataEventSource("http://john:doe@www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_",  "someRandomExtraLongDummyToken");
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://john:doe@www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_&X-Sd-Token=someRandomExtraLongDummyToken";
 
       var convertedUrl = e._decorate(e._url);
 
@@ -50,8 +50,8 @@ describe('StreamdataEventSource.', function () {
 
     it('should decorate a url with params that contains an @', function () {
       //GIVEN
-      var e = new StreamdataEventSource("http://www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_",  "ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz");
-      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_&X-Sd-Token=ZWZiNzlhYTItYjA5MC00YWMwLWE2NTQtYmNmZmJiNDkyZGYz";
+      var e = new StreamdataEventSource("http://www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_",  "someRandomExtraLongDummyToken");
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.faroo.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_&X-Sd-Token=someRandomExtraLongDummyToken";
 
       var convertedUrl = e._decorate(e._url);
 
