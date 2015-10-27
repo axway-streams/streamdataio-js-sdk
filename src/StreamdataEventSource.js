@@ -69,10 +69,15 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
             });
 
             self._sse.addEventListener('error', function (event) {
-                Logger.debug('Error with SSE at ' + event + ': closing the stream.');
-                self._sse.close();
-                self._isConnected = false;
-                self._errorListeners.fire(self._buildErrorMessage(event, true));
+                if (self._sse.readyState !== 0 || !self._isConnected ) {
+                    Logger.debug('Error with SSE at ' + event + ': closing the stream.');
+                    self._sse.close();
+                    self._isConnected = false;
+                    self._errorListeners.fire(self._buildErrorMessage(event, true));
+                }
+                else {
+                    Logger.info('SSE server connection lost, retrying ...');
+                }
             });
 
             self._sse.addEventListener('data', function (event) {
