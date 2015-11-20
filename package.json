@@ -1,6 +1,6 @@
 {
   "name": "streamdata-js-sdk",
-  "version": "1.0.2-alpha.2",
+  "version": "1.0.3-alpha.1",
   "description": "Javascript SDK for Streamdata.io",
   "copyrights": " 2015",
   "scripts": {
