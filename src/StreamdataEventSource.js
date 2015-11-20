@@ -118,7 +118,7 @@ function StreamdataEventSource(url, appToken, headers, authStrategy) {
         var endIndex = url.indexOf(parser.hostname);
         var userInfo = url.substring(parser.protocol.length + 2, endIndex);
 
-        var urlToEncode = parser.protocol + '//' + userInfo + parser.hostname + ((parser.pathname.indexOf('/') == 0) ? '' : '/') + parser.pathname + parser.search;
+        var urlToEncode = parser.protocol + '//' + userInfo + parser.hostname + ((parser.port === "") ? '' : ':' + parser.port) + ((parser.pathname.indexOf('/') == 0) ? '' : '/') + parser.pathname + parser.search;
         var signedUrl = authStrategy === null ? urlToEncode : authStrategy['signUrl'](urlToEncode);
 
         var streamDataQueryParams = self._buildStreamDataQueryParams(headers);
