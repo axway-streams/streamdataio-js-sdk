@@ -61,7 +61,7 @@ describe('StreamdataEventSource.', function () {
     it('should decorate a url with port', function () {
       //GIVEN
       var e = new StreamdataEventSource("http://www.toto.com:3009/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_",  "someRandomExtraLongDummyToken");
-      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.toto.com/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_&X-Sd-Token=someRandomExtraLongDummyToken";
+      var expectedConvertedUrl = "https://streamdata.motwin.net/http://www.toto.com:3009/api?q=knicks&start=1&length=10&l=en&src=news&f=json&key=gbnEDrs@SAjQd6OVhqY_&X-Sd-Token=someRandomExtraLongDummyToken";
 
       var convertedUrl = e._decorate(e._url);
 
