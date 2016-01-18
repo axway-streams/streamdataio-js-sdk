@@ -1,0 +1,17 @@
+.bowerrc
+.gitignore
+**/.*
+*.yml
+*.xml
+*.iml
+bower.json
+gulpfile.js
+src/
+test/
+jsdoc/
+gulp/
+bower_components/
+node_modules/
+dist/libs.js
+dist/streamdataio.min.js.map
+npm-debug.log

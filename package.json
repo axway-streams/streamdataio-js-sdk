@@ -1,5 +1,5 @@
 {
-  "name": "streamdata-js-sdk",
+  "name": "streamdataio-js-sdk",
   "version": "1.0.3",
   "description": "Javascript SDK for Streamdata.io",
   "copyrights": " 2015",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/motwin/streamdata-js-sdk.git"
+    "url": "https://github.com/streamdataio/streamdataio-js-sdk"
   },
   "keywords": [
     "streamdata",
@@ -31,9 +31,9 @@
                   " * See the License for the specific language governing permissions and",
                   " * limitations under the License."],
       "bugs": {
-    "url": "https://github.com/motwin/streamdata-js-sdk/issues"
+    "url": "https://github.com/streamdataio/streamdataio-js-sdk/issues"
   },
-  "homepage": "https://github.com/motwin/streamdata-js-sdk",
+  "homepage": "https://github.com/streamdataio/streamdataio-js-sdk",
   "devDependencies": {
     "bower": "^1.3.12",
     "del": "^1.1.1",

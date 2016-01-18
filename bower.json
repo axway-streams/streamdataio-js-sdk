@@ -1,9 +1,9 @@
 {
-  "name": "streamdata-js-sdk",
-  "version": "1.0.3-alpha.1",
-  "homepage": "https://github.com/motwin/streamdataio-js-sdk",
+  "name": "streamdataio-js-sdk",
+  "version": "1.0.3",
+  "homepage": "https://github.com/streamdataio/streamdataio-js-sdk",
   "authors": [
-    "Motwin"
+    "Streamdata.io"
   ],
   "description": "Javascript SDK for Streamdata.io",
   "keywords": [
