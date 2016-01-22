@@ -25,13 +25,13 @@ Follow this quick start guide to easily integrate streamdata.io into your applic
 Getting Started
 ===============
 
-## 1. Build the SDK from source
+## 1. Get the SDK
 
-#1.1 Prerequisites
+### 1.1 Prerequisites
 
 Having node.js, npm, bower and gulp installed on you computer.
 
-## 1.2 Build
+### 1.2 Option 1 : Build SDK from source
 
 Then check out the project from git and simply run the following command lines to build the sdk file from source:
 
@@ -50,6 +50,17 @@ gulp build
 ```
 this will generate streamdataio.js and streamdataio.min.js files in the dist/ folder.
 
+### 1.3 Option 2 : install the SDK from npm
+
+The streamdataio-js-sdk is available through a npm package.
+
+You can install it through the following command line :
+
+```
+npm install streamdataio-js-sdk --save
+```
+
+streamdataio.js and streamdataio.min.js will be available in node_modules/dist folder. 
 
 ## 2. Add SDK to your application
 
@@ -250,6 +261,16 @@ In order to use it, you'll first need to add streamdataio_auth javascript auth l
 ```html
 <script src="/js/streamdataio-auth.min.js"></script>
 ```
+
+This auth javascript library is available :
+
+- in the github projet https://github.com/streamdataio/streamdataio-js
+
+- via npm through the following command line :
+```html
+npm install streamdataio-js-sdk-auth
+```
+
 
 You can then use a signatureStrategy object when creating your StreamDataEventSource as follow:
 

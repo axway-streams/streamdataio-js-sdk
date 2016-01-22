@@ -16,6 +16,7 @@ module.exports = function (config) {
         'bower_components/cryptojslib/rollups/aes.js',
         'bower_components/cryptojslib/components/mode-ecb.js',
         'bower_components/cryptojslib/components/enc-base64.js',
+        'node_modules/streamdataio-js-sdk-auth/dist/streamdataio-auth.min.js',
 
         'src/Logger.js',
         'src/Preconditions.js',

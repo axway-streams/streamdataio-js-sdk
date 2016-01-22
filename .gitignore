@@ -119,13 +119,14 @@ local.properties
 
 
 ### Bower ###
+.bowerrc
 bower_components
 .bower-cache
 .bower-registry
 .bower-tmp
 
 ### Gulp ###
-
+dist/*
 .sass-cache
 .tmp
 #streamdata-sample-apps
