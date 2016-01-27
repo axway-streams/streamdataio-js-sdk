@@ -62,6 +62,16 @@ npm install streamdataio-js-sdk --save
 
 streamdataio.js and streamdataio.min.js will be available in node_modules/dist folder. 
 
+### 1.4 Option 3 : via CDN
+
+streamdataio JS SDK is available via CDN at the following link :
+
+```
+https://cdn.rawgit.com/streamdataio/streamdataio-js-sdk/master/dist/streamdataio.min.js
+```
+
+This method must be used only for dev/testing purpose.
+
 ## 2. Add SDK to your application
 
 Add reference to the streamdataio.min.js file in your application code. Usually this is done by using a script html tag into your main page:
@@ -270,7 +280,6 @@ This auth javascript library is available :
 ```html
 npm install streamdataio-js-sdk-auth
 ```
-
 
 You can then use a signatureStrategy object when creating your StreamDataEventSource as follow:
 
