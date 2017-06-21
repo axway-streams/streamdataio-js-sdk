@@ -2,7 +2,7 @@
 **/karma.config.js
 **/tsconfig.json
 **/tslint.json
-node_modules
-src
-typings
-build
+/node_modules
+/src
+/typings
+/build
