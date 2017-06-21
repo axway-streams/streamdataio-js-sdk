@@ -1,21 +1,5 @@
-/**
- *
- *    Copyright 2015 streamdata.io
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var streamDataEventSource_1 = require("./sse/streamDataEventSource");
 var listeners_1 = require("./events/listeners");
 var preconditions_1 = require("./utils/preconditions");
@@ -24,13 +8,14 @@ var config_1 = require("./configuration/config");
 var streamDataError_1 = require("./errors/streamDataError");
 var streamDataUrl_1 = require("./sse/streamDataUrl");
 var StreamData = (function () {
-    function StreamData(url, appToken, headers) {
+    function StreamData(url, appToken, headers, authStragety) {
         // Build internal configuration
         preconditions_1.Preconditions.checkNotNull(url, 'url cannot be null.');
         preconditions_1.Preconditions.checkNotNull(appToken, 'appToken cannot be null.');
         this._url = url;
         this._token = appToken;
         this._headers = headers ? headers : [];
+        this._authStrategy = authStragety;
         // Init listeners
         this._openListeners = new listeners_1.Listeners();
         this._dataListeners = new listeners_1.Listeners();
@@ -43,7 +28,7 @@ var StreamData = (function () {
     }
     StreamData.prototype.open = function () {
         preconditions_1.Preconditions.checkNotNull(this._url, 'url cannot be null');
-        this.close();
+        this._sse && this.close();
         var decoratedUrl = this._decorate(this._url, this._headers);
         if (decoratedUrl) {
             this._sse = new streamDataEventSource_1.StreamDataEventSource(decoratedUrl);
@@ -55,7 +40,7 @@ var StreamData = (function () {
                 if (this._sse.readyState !== 0 || !this._isConnected) {
                     logger_1.Logger.debug('Error with SSE at ' + event + ': closing the stream.');
                     this._sse.close();
-                    this._errorListeners.fire(this._buildErrorMessage(event.error));
+                    this._errorListeners.fire(StreamData._buildErrorMessage(event.error));
                 }
                 else {
                     logger_1.Logger.info('SSE server connection lost, retrying ...');
@@ -67,11 +52,11 @@ var StreamData = (function () {
             }, this);
             this._sse.addPatchListener(function (event) {
                 logger_1.Logger.debug('Received patch:' + event.patch);
-                this._dataListeners.fire(event.patch);
+                this._patchListeners.fire(event.patch);
             }, this);
             this._sse.addMonitorListener(function (event) {
                 logger_1.Logger.debug('Received monitor:' + event.data);
-                this._dataListeners.fire(event.data);
+                this._monitorListeners.fire(event.data);
             }, this);
         }
         return this;
@@ -110,20 +95,22 @@ var StreamData = (function () {
     };
     StreamData.prototype._decorate = function (url, headers) {
         preconditions_1.Preconditions.checkNotNull(url, 'url cannot be null');
-        var clientUrl = new streamDataUrl_1.StreamDataUrl(url, this._token, headers);
+        var signedUrl = this._authStrategy ? this._authStrategy.signUrl(url) : url;
+        var clientUrl = new streamDataUrl_1.StreamDataUrl(signedUrl, this._token, headers);
         var streamdataUrl = this.server.getFullUrl(clientUrl);
         logger_1.Logger.debug('converted url :' + streamdataUrl);
         return streamdataUrl;
     };
-    StreamData.prototype._buildErrorMessage = function (error) {
+    StreamData._buildErrorMessage = function (error) {
         logger_1.Logger.error(error);
         if (error['cause'] || error['message'] || error['status']) {
-            return new streamDataError_1.StreamDataError(error['cause'], error['message'], error['status'], 'server');
+            return new streamDataError_1.StreamDataError(error['cause'], error['message'], error['status'], 'server', error);
         }
         else {
-            return streamDataError_1.DefaultStreamDataError;
+            return streamDataError_1.StreamDataError.createDefault(error);
         }
     };
     return StreamData;
 }());
 exports.StreamData = StreamData;
+//# sourceMappingURL=streamData.js.map

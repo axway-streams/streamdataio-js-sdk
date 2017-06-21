@@ -1,0 +1,7 @@
+{
+  "name": "streamdataio",
+  "main": "./dist/src/**/*.d.ts",
+  "out": "../bundles/streamdataio.d.ts",
+  "outputAsModuleFolder": true,
+  "externals": true
+}
