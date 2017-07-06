@@ -35,11 +35,12 @@
   "scripts": {
     "clean": "shx rm -rf dist",
     "test": "karma start build/karma.config.js",
+    "build-docs": "typedoc --name 'streamdata.io SDK' --module umd --target es5 --excludeExternals --excludePrivate --hideGenerator --theme build/typedoc-streamdataio-theme --out dist/docs --mode file src",
     "build-js": "tsc --outDir 'dist/commonjs' && tsc -m es6 --outDir 'dist/es6'",
     "build-node": "webpack --config=build/webpack-node.config.js",
     "build-web": "webpack --config=build/webpack-web.config.js",
     "build-types": "npm run build-js && dts-bundle --configJson build/dts-bundle.json",
-    "build": "npm run clean && npm run build-node && npm run build-web && npm run build-types"
+    "build": "npm run clean && npm run build-node && npm run build-web && npm run build-types && npm run build-docs"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.41",
@@ -56,6 +57,7 @@
     "source-map-loader": "^0.2.1",
     "tslint": "^5.4.3",
     "tslint-loader": "^3.5.3",
+    "typedoc": "^0.7.1",
     "typescript": "^2.3.4",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5",

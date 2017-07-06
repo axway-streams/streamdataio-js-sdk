@@ -32,7 +32,7 @@ export class StreamDataIo {
    * </code></pre>
    * @returns {StreamDataEventSource}
    */
-  public static createEventSource(url: string, appToken: string, headers: string[], authStragety?: StreamDataAuthStrategy) {
+  public static createEventSource(url: string, appToken: string, headers?: string[], authStragety?: StreamDataAuthStrategy) {
     Preconditions.checkNotNull(url, 'url cannot be null');
 
     if (!(url.lastIndexOf('http://', 0) === 0)

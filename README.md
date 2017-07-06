@@ -75,10 +75,6 @@ streamdataio JS SDK is available via CDN at the following link :
 ```
 https://cdn.rawgit.com/streamdataio/streamdataio-js-sdk/master/dist/bundles/streamdataio-web.min.js
 ```
-or
-```
-https://cdn.rawgit.com/streamdataio/streamdataio-js-sdk/master/dist/bundles/streamdataio-node.min.js
-```
 
 This method must be used only for dev/testing purpose.
 

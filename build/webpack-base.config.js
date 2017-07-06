@@ -42,7 +42,7 @@ module.exports = function (target, entities)
         NODE: JSON.stringify(target === 'node')
       }),
       new webpack.optimize.UglifyJsPlugin({
-        dead_code : true,
+        dead_code: true,
         minimize : true,
         sourceMap: true,
         include  : /\.min\.js$/,
