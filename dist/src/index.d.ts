@@ -28,6 +28,6 @@ export declare class StreamDataIo {
      * </code></pre>
      * @returns {StreamDataEventSource}
      */
-    static createEventSource(url: string, appToken: string, headers: string[], authStragety?: StreamDataAuthStrategy): StreamData;
+    static createEventSource(url: string, appToken: string, headers?: string[], authStragety?: StreamDataAuthStrategy): StreamData;
 }
 export declare const createEventSource: typeof StreamDataIo.createEventSource;

@@ -8,11 +8,15 @@ const DESTINATION = path.resolve(ROOT, 'dist');
 const BUNDLES = DESTINATION + '/bundles';
 const LIB_NAME = 'streamdataio';
 
-module.exports = function (target, entities)
+module.exports = function (target, entities, addSuffix)
 {
   let entries = {};
-  entries[`${LIB_NAME}-${target}`] = entities;
-  entries[`${LIB_NAME}-${target}.min`] = entities;
+  let entry = LIB_NAME;
+  if (addSuffix) {
+    entry += `-${target}`;
+  }
+  entries[entry] = entities;
+  entries[`${entry}.min`] = entities;
 
   return {
     context: SRC,

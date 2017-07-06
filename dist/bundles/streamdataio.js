@@ -3059,4 +3059,4 @@ module.exports = __webpack_require__(39);
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=streamdataio-web.js.map
+//# sourceMappingURL=streamdataio.js.map

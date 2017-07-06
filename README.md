@@ -66,24 +66,24 @@ You can install it through the following command line :
 npm install streamdataio-js-sdk --save
 ```
 
-Distribution files will be available in node_modules/streamdataio-js-sdk/dist/bundles folder. Use respectively streamdataio-web.min.js for Web environment or streamdataio-node.min.js for Node.Js environment
+Distribution files will be available in node_modules/streamdataio-js-sdk/dist/bundles folder. Use respectively streamdataio.min.js for Web environment or streamdataio-node.min.js for Node.Js environment
 
 ### 1.4 Option 3 : via CDN
 
 streamdataio JS SDK is available via CDN at the following link :
 
 ```
-https://cdn.rawgit.com/streamdataio/streamdataio-js-sdk/master/dist/bundles/streamdataio-web.min.js
+https://cdn.rawgit.com/streamdataio/streamdataio-js-sdk/master/dist/bundles/streamdataio.min.js
 ```
 
 This method must be used only for dev/testing purpose.
 
 ## 2. Add SDK to your application
 
-Add reference to the streamdataio-web.min.js file in your application code. Usually this is done by using a script html tag into your main page:
+Add reference to the streamdataio.min.js file in your application code. Usually this is done by using a script html tag into your main page:
 
 ```html
-<script src="streamdataio-web.min.js"></script>
+<script src="streamdataio.min.js"></script>
 ```
 
 By doing this, you access in your JavaScript code to the ```streamdataio``` object which is the central point of all streamdata.io SDK API.
@@ -169,7 +169,7 @@ Each callback will be described in further details in the Public API JavaScript 
 
 ```javascript
 <!-- include streamdataio library -->
-<script src="streamdataio-web.min.js" />
+<script src="streamdataio.min.js" />
 
 <!-- use json-patch-duplex library for applying patches -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js" />

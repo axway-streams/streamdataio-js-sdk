@@ -113,14 +113,14 @@
 				<p>The streamdataio-js-sdk is available through a npm package.</p>
 				<p>You can install it through the following command line :</p>
 				<pre><code>npm <span class="hljs-keyword">install </span>streamdataio-<span class="hljs-keyword">js-sdk </span>--save
-</code></pre><p>Distribution files will be available in node_modules/streamdataio-js-sdk/dist/bundles folder. Use respectively streamdataio-web.min.js for Web environment or streamdataio-node.min.js for Node.Js environment</p>
+</code></pre><p>Distribution files will be available in node_modules/streamdataio-js-sdk/dist/bundles folder. Use respectively streamdataio.min.js for Web environment or streamdataio-node.min.js for Node.Js environment</p>
 				<h3 id="1-4-option-3-via-cdn">1.4 Option 3 : via CDN</h3>
 				<p>streamdataio JS SDK is available via CDN at the following link :</p>
-				<pre><code>https:<span class="hljs-regexp">//</span>cdn.rawgit.com<span class="hljs-regexp">/streamdataio/</span>streamdataio-js-sdk<span class="hljs-regexp">/master/</span>dist<span class="hljs-regexp">/bundles/</span>streamdataio-web.min.js
+				<pre><code>https:<span class="hljs-regexp">//</span>cdn.rawgit.com<span class="hljs-regexp">/streamdataio/</span>streamdataio-js-sdk<span class="hljs-regexp">/master/</span>dist<span class="hljs-regexp">/bundles/</span>streamdataio.min.js
 </code></pre><p>This method must be used only for dev/testing purpose.</p>
 				<h2 id="2-add-sdk-to-your-application">2. Add SDK to your application</h2>
-				<p>Add reference to the streamdataio-web.min.js file in your application code. Usually this is done by using a script html tag into your main page:</p>
-				<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"streamdataio-web.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+				<p>Add reference to the streamdataio.min.js file in your application code. Usually this is done by using a script html tag into your main page:</p>
+				<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"streamdataio.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
 				<p>By doing this, you access in your JavaScript code to the <code>streamdataio</code> object which is the central point of all streamdata.io SDK API.</p>
 				<h2 id="3-use-streamdata-io-to-connect-to-your-api">3. Use streamdata.io to connect to your API</h2>
@@ -169,7 +169,7 @@
 				<p>You can copy/paste this piece of code in a HTML page and test it.</p>
 				<p>Each callback will be described in further details in the Public API JavaScript doc section.</p>
 				<pre><code class="lang-javascript">&lt;!-- include streamdataio library --&gt;
-&lt;script src="streamdataio-web.min.js" /&gt;
+&lt;script src="streamdataio.min.js" /&gt;
 
 &lt;!-- use json-patch-duplex library for applying patches --&gt;
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/fast-json-patch/0.5.1/json-patch-duplex.min.js" /&gt;

@@ -30,7 +30,7 @@
     " * See the License for the specific language governing permissions and",
     " * limitations under the License."
   ],
-  "main": "./dist/bundles/streamdataio-web.min.js",
+  "main": "./dist/bundles/streamdataio.min.js",
   "typings": "./dist/bundles/streamdataio.d.ts",
   "scripts": {
     "clean": "shx rm -rf dist",
