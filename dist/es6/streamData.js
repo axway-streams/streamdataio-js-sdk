@@ -35,9 +35,7 @@ var StreamData = (function () {
                 this._openListeners.fire();
             }, this);
             this._sse.addErrorListener(function (event) {
-                if (this._sse.readyState !== 0 || !this._isConnected) {
-                    Logger.debug('Error with SSE at ' + event + ': closing the stream.');
-                    this._sse.close();
+                if (event.error) {
                     this._errorListeners.fire(StreamData._buildErrorMessage(event.error));
                 }
                 else {

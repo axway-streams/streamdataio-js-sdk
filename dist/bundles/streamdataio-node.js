@@ -735,6 +735,29 @@ function EventSource (url, eventSourceInitDict) {
     }, self.reconnectInterval)
   }
 
+  function onConnectionError () {
+    if (readyState === EventSource.CLOSED) return
+
+    if (readyState === EventSource.OPEN) {
+      // close the current connection
+      req.abort()
+      readyState = EventSource.CONNECTING
+
+      _emit('error', new Event('error'))
+    } else if (readyState === EventSource.CONNECTING) {
+      _emit('error', new Event('error'))
+      // The url may have been changed by a temporary
+      // redirect. If that's the case, revert it now.
+      if (reconnectUrl) {
+        url = reconnectUrl
+        reconnectUrl = null
+      }
+      setTimeout(function () {
+        connect()
+      }, self.reconnectInterval)
+    }
+  }
+
   var req
   var lastEventId = ''
   if (eventSourceInitDict && eventSourceInitDict.headers && eventSourceInitDict.headers['Last-Event-ID']) {
@@ -892,7 +915,7 @@ function EventSource (url, eventSourceInitDict) {
       })
     })
 
-    req.on('error', onConnectionClosed)
+    req.on('error', onConnectionError)
     if (req.setNoDelay) req.setNoDelay(true)
     req.end()
   }
@@ -1924,9 +1947,7 @@ var StreamData = (function () {
                 this._openListeners.fire();
             }, this);
             this._sse.addErrorListener(function (event) {
-                if (this._sse.readyState !== 0 || !this._isConnected) {
-                    logger_1.Logger.debug('Error with SSE at ' + event + ': closing the stream.');
-                    this._sse.close();
+                if (event.error) {
                     this._errorListeners.fire(StreamData._buildErrorMessage(event.error));
                 }
                 else {
