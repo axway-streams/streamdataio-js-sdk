@@ -2,7 +2,8 @@ import {Preconditions} from './utils/preconditions';
 import {Logger} from './utils/logger';
 import {StreamData} from './streamData';
 import {StreamDataAuthStrategy} from './auth/streamDataAuthStrategy';
-
+import {NoPrefixStreamDataServer} from './configuration/config';
+import {StreamDataServer} from './sse/streamDataServer';
 /**
  * Streamdata.io JavaScript SDK
  */
@@ -47,5 +48,5 @@ export class StreamDataIo {
 }
 
 export const createEventSource = StreamDataIo.createEventSource;
-
+export const noPrefixServer = NoPrefixStreamDataServer;
 

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var preconditions_1 = require("./utils/preconditions");
 var logger_1 = require("./utils/logger");
 var streamData_1 = require("./streamData");
+var config_1 = require("./configuration/config");
 /**
  * Streamdata.io JavaScript SDK
  */
@@ -47,4 +48,5 @@ var StreamDataIo = (function () {
 }());
 exports.StreamDataIo = StreamDataIo;
 exports.createEventSource = StreamDataIo.createEventSource;
+exports.noPrefixServer = config_1.NoPrefixStreamDataServer;
 //# sourceMappingURL=index.js.map

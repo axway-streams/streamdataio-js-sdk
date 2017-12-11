@@ -5,6 +5,7 @@ export interface StreamDataAuthStrategy {
 }
 
 export const DefaultStreamDataServer: StreamDataServer;
+export const NoPrefixStreamDataServer: StreamDataServer;
 
 export type StreamDataSource = 'server' | 'client';
 export class StreamDataError {
@@ -85,6 +86,7 @@ export class StreamDataIo {
         static createEventSource(url: string, appToken: string, headers?: string[], authStragety?: StreamDataAuthStrategy): StreamData;
 }
 export const createEventSource: typeof StreamDataIo.createEventSource;
+export const noPrefixServer: StreamDataServer;
 
 export interface Event {
 }

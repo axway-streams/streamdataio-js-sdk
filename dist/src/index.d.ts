@@ -1,5 +1,6 @@
 import { StreamData } from './streamData';
 import { StreamDataAuthStrategy } from './auth/streamDataAuthStrategy';
+import { StreamDataServer } from './sse/streamDataServer';
 /**
  * Streamdata.io JavaScript SDK
  */
@@ -31,3 +32,4 @@ export declare class StreamDataIo {
     static createEventSource(url: string, appToken: string, headers?: string[], authStragety?: StreamDataAuthStrategy): StreamData;
 }
 export declare const createEventSource: typeof StreamDataIo.createEventSource;
+export declare const noPrefixServer: StreamDataServer;

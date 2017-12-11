@@ -1,6 +1,7 @@
 import { Preconditions } from './utils/preconditions';
 import { Logger } from './utils/logger';
 import { StreamData } from './streamData';
+import { NoPrefixStreamDataServer } from './configuration/config';
 /**
  * Streamdata.io JavaScript SDK
  */
@@ -45,4 +46,5 @@ var StreamDataIo = (function () {
 }());
 export { StreamDataIo };
 export var createEventSource = StreamDataIo.createEventSource;
+export var noPrefixServer = NoPrefixStreamDataServer;
 //# sourceMappingURL=index.js.map

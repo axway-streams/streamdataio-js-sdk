@@ -182,7 +182,7 @@ module.exports = function(it){
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store      = __webpack_require__(36)('wks')
+var store      = __webpack_require__(37)('wks')
   , uid        = __webpack_require__(26)
   , Symbol     = __webpack_require__(3).Symbol
   , USE_SYMBOL = typeof Symbol == 'function';
@@ -201,7 +201,7 @@ $exports.store = store;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var jsonHelper_1 = __webpack_require__(28);
+var jsonHelper_1 = __webpack_require__(29);
 var LogLevel;
 (function (LogLevel) {
     LogLevel[LogLevel["ERROR"] = 0] = "ERROR";
@@ -340,7 +340,7 @@ module.exports = function(it, key){
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP         = __webpack_require__(19)
-  , createDesc = __webpack_require__(33);
+  , createDesc = __webpack_require__(34);
 module.exports = __webpack_require__(11) ? function(object, key, value){
   return dP.f(object, key, createDesc(1, value));
 } : function(object, key, value){
@@ -510,7 +510,7 @@ module.exports = function(KEY){
 
 // 7.2.8 IsRegExp(argument)
 var isObject = __webpack_require__(13)
-  , cof      = __webpack_require__(29)
+  , cof      = __webpack_require__(30)
   , MATCH    = __webpack_require__(5)('match');
 module.exports = function(it){
   var isRegExp;
@@ -579,7 +579,7 @@ __webpack_require__(16).inspectSource = function(it){
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var shared = __webpack_require__(36)('keys')
+var shared = __webpack_require__(37)('keys')
   , uid    = __webpack_require__(26);
 module.exports = function(key){
   return shared[key] || (shared[key] = uid(key));
@@ -733,29 +733,6 @@ function EventSource (url, eventSourceInitDict) {
       }
       connect()
     }, self.reconnectInterval)
-  }
-
-  function onConnectionError () {
-    if (readyState === EventSource.CLOSED) return
-
-    if (readyState === EventSource.OPEN) {
-      // close the current connection
-      req.abort()
-      readyState = EventSource.CONNECTING
-
-      _emit('error', new Event('error'))
-    } else if (readyState === EventSource.CONNECTING) {
-      _emit('error', new Event('error'))
-      // The url may have been changed by a temporary
-      // redirect. If that's the case, revert it now.
-      if (reconnectUrl) {
-        url = reconnectUrl
-        reconnectUrl = null
-      }
-      setTimeout(function () {
-        connect()
-      }, self.reconnectInterval)
-    }
   }
 
   var req
@@ -915,7 +892,7 @@ function EventSource (url, eventSourceInitDict) {
       })
     })
 
-    req.on('error', onConnectionError)
+    req.on('error', onConnectionClosed)
     if (req.setNoDelay) req.setNoDelay(true)
     req.end()
   }
@@ -1106,6 +1083,21 @@ function MessageEvent (type, eventInitDict) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var streamDataServer_1 = __webpack_require__(47);
+exports.DefaultStreamDataServer = new streamDataServer_1.StreamDataServer('https', 'streamdata.motwin.net');
+exports.NoPrefixStreamDataServer = new streamDataServer_1.StreamDataServer('', '');
+exports.NoPrefixStreamDataServer.getFullUrl = function (clientUrl) {
+    return "" + clientUrl.toString();
+};
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var JsonHelper = (function () {
     function JsonHelper() {
     }
@@ -1135,7 +1127,7 @@ exports.JsonHelper = JsonHelper;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -1145,7 +1137,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(13)
@@ -1157,7 +1149,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 // IE 8- don't enum bug keys
@@ -1166,14 +1158,14 @@ module.exports = (
 ).split(',');
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var create         = __webpack_require__(61)
-  , descriptor     = __webpack_require__(33)
-  , setToStringTag = __webpack_require__(35)
+  , descriptor     = __webpack_require__(34)
+  , setToStringTag = __webpack_require__(36)
   , IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
@@ -1185,7 +1177,7 @@ module.exports = function(Constructor, NAME, next){
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = function(bitmap, value){
@@ -1198,7 +1190,7 @@ module.exports = function(bitmap, value){
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = function(regExp, replace){
@@ -1211,7 +1203,7 @@ module.exports = function(regExp, replace){
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(19).f
@@ -1223,7 +1215,7 @@ module.exports = function(it, tag, stat){
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(3)
@@ -1234,12 +1226,12 @@ module.exports = function(key){
 };
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var toLength = __webpack_require__(4)
-  , repeat   = __webpack_require__(38)
+  , repeat   = __webpack_require__(39)
   , defined  = __webpack_require__(2);
 
 module.exports = function(that, maxLength, fillString, left){
@@ -1256,7 +1248,7 @@ module.exports = function(that, maxLength, fillString, left){
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1274,7 +1266,7 @@ module.exports = function repeat(count){
 };
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(14)
@@ -1286,7 +1278,7 @@ module.exports = function(index, length){
 };
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1521,7 +1513,7 @@ module.exports = URL;
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1530,6 +1522,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var preconditions_1 = __webpack_require__(15);
 var logger_1 = __webpack_require__(6);
 var streamData_1 = __webpack_require__(49);
+var config_1 = __webpack_require__(28);
 /**
  * Streamdata.io JavaScript SDK
  */
@@ -1574,10 +1567,11 @@ var StreamDataIo = (function () {
 }());
 exports.StreamDataIo = StreamDataIo;
 exports.createEventSource = StreamDataIo.createEventSource;
+exports.noPrefixServer = config_1.NoPrefixStreamDataServer;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(84);
@@ -1615,17 +1609,6 @@ __webpack_require__(98);
 __webpack_require__(69);
 __webpack_require__(70);
 module.exports = __webpack_require__(16).String;
-
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var streamDataServer_1 = __webpack_require__(47);
-exports.DefaultStreamDataServer = new streamDataServer_1.StreamDataServer('https', 'streamdata.motwin.net');
 
 
 /***/ }),
@@ -1755,7 +1738,7 @@ exports.Listeners = Listeners;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = __webpack_require__(6);
-var jsonHelper_1 = __webpack_require__(28);
+var jsonHelper_1 = __webpack_require__(29);
 if (true) {
     var EventSource = __webpack_require__(27);
 }
@@ -1914,7 +1897,7 @@ var streamDataEventSource_1 = __webpack_require__(46);
 var listeners_1 = __webpack_require__(45);
 var preconditions_1 = __webpack_require__(15);
 var logger_1 = __webpack_require__(6);
-var config_1 = __webpack_require__(43);
+var config_1 = __webpack_require__(28);
 var streamDataError_1 = __webpack_require__(44);
 var streamDataUrl_1 = __webpack_require__(48);
 var StreamData = (function () {
@@ -2082,7 +2065,7 @@ module.exports = function(it){
 // true  -> Array#includes
 var toIObject = __webpack_require__(25)
   , toLength  = __webpack_require__(4)
-  , toIndex   = __webpack_require__(39);
+  , toIndex   = __webpack_require__(40);
 module.exports = function(IS_INCLUDES){
   return function($this, el, fromIndex){
     var O      = toIObject($this)
@@ -2155,7 +2138,7 @@ module.exports = __webpack_require__(3).document && document.documentElement;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = !__webpack_require__(11) && !__webpack_require__(7)(function(){
-  return Object.defineProperty(__webpack_require__(30)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+  return Object.defineProperty(__webpack_require__(31)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 });
 
 /***/ }),
@@ -2163,7 +2146,7 @@ module.exports = !__webpack_require__(11) && !__webpack_require__(7)(function(){
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(29);
+var cof = __webpack_require__(30);
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
@@ -2180,8 +2163,8 @@ var LIBRARY        = __webpack_require__(60)
   , hide           = __webpack_require__(9)
   , has            = __webpack_require__(8)
   , Iterators      = __webpack_require__(59)
-  , $iterCreate    = __webpack_require__(32)
-  , setToStringTag = __webpack_require__(35)
+  , $iterCreate    = __webpack_require__(33)
+  , setToStringTag = __webpack_require__(36)
   , getPrototypeOf = __webpack_require__(63)
   , ITERATOR       = __webpack_require__(5)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
@@ -2263,7 +2246,7 @@ module.exports = false;
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject    = __webpack_require__(10)
   , dPs         = __webpack_require__(62)
-  , enumBugKeys = __webpack_require__(31)
+  , enumBugKeys = __webpack_require__(32)
   , IE_PROTO    = __webpack_require__(21)('IE_PROTO')
   , Empty       = function(){ /* empty */ }
   , PROTOTYPE   = 'prototype';
@@ -2271,7 +2254,7 @@ var anObject    = __webpack_require__(10)
 // Create object with fake `null` prototype: use iframe Object with cleared prototype
 var createDict = function(){
   // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(30)('iframe')
+  var iframe = __webpack_require__(31)('iframe')
     , i      = enumBugKeys.length
     , lt     = '<'
     , gt     = '>'
@@ -2367,7 +2350,7 @@ module.exports = function(object, names){
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
 var $keys       = __webpack_require__(64)
-  , enumBugKeys = __webpack_require__(31);
+  , enumBugKeys = __webpack_require__(32);
 
 module.exports = Object.keys || function keys(O){
   return $keys(O, enumBugKeys);
@@ -2414,7 +2397,7 @@ module.exports = function(it, S){
 "use strict";
 
 var $export = __webpack_require__(0);
-var $re = __webpack_require__(34)(/[&<>"']/g, {
+var $re = __webpack_require__(35)(/[&<>"']/g, {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
@@ -2431,7 +2414,7 @@ $export($export.P + $export.F, 'String', {escapeHTML: function escapeHTML(){ ret
 "use strict";
 
 var $export = __webpack_require__(0);
-var $re = __webpack_require__(34)(/&(?:amp|lt|gt|quot|apos);/g, {
+var $re = __webpack_require__(35)(/&(?:amp|lt|gt|quot|apos);/g, {
   '&amp;':  '&',
   '&lt;':   '<',
   '&gt;':   '>',
@@ -2700,7 +2683,7 @@ __webpack_require__(1)('fontsize', function(createHTML){
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export        = __webpack_require__(0)
-  , toIndex        = __webpack_require__(39)
+  , toIndex        = __webpack_require__(40)
   , fromCharCode   = String.fromCharCode
   , $fromCodePoint = String.fromCodePoint;
 
@@ -2821,7 +2804,7 @@ var $export = __webpack_require__(0);
 
 $export($export.P, 'String', {
   // 21.1.3.13 String.prototype.repeat(count)
-  repeat: __webpack_require__(38)
+  repeat: __webpack_require__(39)
 });
 
 /***/ }),
@@ -2948,7 +2931,7 @@ var $RegExpStringIterator = function(regexp, string){
   this._s = string;
 };
 
-__webpack_require__(32)($RegExpStringIterator, 'RegExp String', function next(){
+__webpack_require__(33)($RegExpStringIterator, 'RegExp String', function next(){
   var match = this._r.exec(this._s);
   return {value: match, done: match === null};
 });
@@ -2973,7 +2956,7 @@ $export($export.P, 'String', {
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var $export = __webpack_require__(0)
-  , $pad    = __webpack_require__(37);
+  , $pad    = __webpack_require__(38);
 
 $export($export.P, 'String', {
   padEnd: function padEnd(maxLength /*, fillString = ' ' */){
@@ -2989,7 +2972,7 @@ $export($export.P, 'String', {
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var $export = __webpack_require__(0)
-  , $pad    = __webpack_require__(37);
+  , $pad    = __webpack_require__(38);
 
 $export($export.P, 'String', {
   padStart: function padStart(maxLength /*, fillString = ' ' */){
@@ -3030,7 +3013,7 @@ __webpack_require__(24)('trimRight', function($trim){
 "use strict";
 
 
-var parse = __webpack_require__(40);
+var parse = __webpack_require__(41);
 
 /**
  * Transform an URL to a valid origin value.
@@ -3221,7 +3204,7 @@ var ignore = { hash: 1, query: 1 }
  */
 module.exports = function lolcation(loc) {
   loc = loc || global.location || {};
-  URL = URL || __webpack_require__(40);
+  URL = URL || __webpack_require__(41);
 
   var finaldestination = {}
     , type = typeof loc
@@ -3275,9 +3258,9 @@ module.exports = require("util");
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(42);
+__webpack_require__(43);
 __webpack_require__(27);
-module.exports = __webpack_require__(41);
+module.exports = __webpack_require__(42);
 
 
 /***/ })
