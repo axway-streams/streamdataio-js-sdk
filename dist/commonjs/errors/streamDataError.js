@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var StreamDataError = (function () {
+var StreamDataError = /** @class */ (function () {
     function StreamDataError(type, message, status, source, original) {
         this.type = type;
         this.message = message;
@@ -33,11 +33,11 @@ var StreamDataError = (function () {
         enumerable: true,
         configurable: true
     });
+    StreamDataError.DEFAULT_TYPE = 'UnknownError';
+    StreamDataError.DEFAULT_MESSAGE = 'An error occured. Please check your console logs for more details.';
+    StreamDataError.DEFAULT_STATUS = 1000;
+    StreamDataError.DEFAULT_SOURCE = 'server';
     return StreamDataError;
 }());
-StreamDataError.DEFAULT_TYPE = 'UnknownError';
-StreamDataError.DEFAULT_MESSAGE = 'An error occured. Please check your console logs for more details.';
-StreamDataError.DEFAULT_STATUS = 1000;
-StreamDataError.DEFAULT_SOURCE = 'server';
 exports.StreamDataError = StreamDataError;
 //# sourceMappingURL=streamDataError.js.map

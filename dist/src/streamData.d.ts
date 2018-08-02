@@ -1,11 +1,11 @@
-import { StreamDataError } from './errors/streamDataError';
-import { StreamDataServer } from './sse/streamDataServer';
-import { StreamDataAuthStrategy } from './auth/streamDataAuthStrategy';
+import { StreamDataError } from 'errors/streamDataError';
+import { StreamDataServer } from 'sse/streamDataServer';
+import { StreamDataAuthStrategy } from 'auth/streamDataAuthStrategy';
 export declare class StreamData {
     private _url;
-    private _token;
-    private _headers;
-    private _authStrategy;
+    private _appToken;
+    private _headers?;
+    private _authStrategy?;
     private _openListeners;
     private _dataListeners;
     private _patchListeners;
@@ -13,7 +13,7 @@ export declare class StreamData {
     private _monitorListeners;
     private _sse;
     server: StreamDataServer;
-    constructor(url: string, appToken: string, headers?: string[], authStragety?: StreamDataAuthStrategy);
+    constructor(_url: string, _appToken: string, _headers?: string[], _authStrategy?: StreamDataAuthStrategy);
     open(): StreamData;
     close(): StreamData;
     onOpen(callback: (data: any) => void, context?: any): this;
@@ -22,6 +22,6 @@ export declare class StreamData {
     onPatch(callback: (data: any) => void, context?: any): this;
     onMonitor(callback: (data: any) => void, context?: any): this;
     isConnected(): boolean;
-    private _decorate(url, headers);
-    private static _buildErrorMessage(error);
+    private _decorate;
+    private static _buildErrorMessage;
 }

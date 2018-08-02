@@ -1,2 +1,2 @@
-import { StreamDataServer } from '../sse/streamDataServer';
+import { StreamDataServer } from 'sse/streamDataServer';
 export declare const DefaultStreamDataServer: StreamDataServer;

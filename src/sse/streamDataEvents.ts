@@ -1,3 +1,11 @@
+export enum EventType {
+  OPEN = 'open',
+  ERROR = 'error',
+  DATA = 'data',
+  PATCH = 'patch',
+  MONITOR = 'monitor'
+}
+
 export interface Event {}
 
 export interface OpenEvent extends Event {}
@@ -15,5 +23,5 @@ export interface MonitorEvent extends Event {
 }
 
 export interface ErrorEvent extends Event {
-  readonly error : any;
+  readonly error: any;
 }

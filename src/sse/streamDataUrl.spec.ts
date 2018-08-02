@@ -1,4 +1,4 @@
-import {StreamDataUrl} from './streamDataUrl';
+import {StreamDataUrl} from 'sse/streamDataUrl';
 describe('StreamDataUrl', function () {
 
   it('should decorate a simple url with no params', function () {

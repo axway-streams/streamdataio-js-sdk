@@ -8,7 +8,7 @@ var LogLevel;
     LogLevel[LogLevel["INFO"] = 2] = "INFO";
     LogLevel[LogLevel["DEBUG"] = 3] = "DEBUG";
 })(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
-var Logger = (function () {
+var Logger = /** @class */ (function () {
     function Logger() {
     }
     /**
@@ -98,17 +98,17 @@ var Logger = (function () {
             return replacedString.substring(0, Math.min(500, replacedString.length));
         }) : pattern;
     };
+    /**
+     * @private
+     * @memberOf Logger#
+     */
+    Logger._console = console;
+    /**
+     * @private
+     * @memberOf Logger#
+     */
+    Logger._level = LogLevel.INFO;
     return Logger;
 }());
-/**
- * @private
- * @memberOf Logger#
- */
-Logger._console = console;
-/**
- * @private
- * @memberOf Logger#
- */
-Logger._level = LogLevel.INFO;
 exports.Logger = Logger;
 //# sourceMappingURL=logger.js.map

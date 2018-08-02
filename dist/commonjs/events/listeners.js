@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var preconditions_1 = require("../utils/preconditions");
 var logger_1 = require("../utils/logger");
-var Listeners = (function () {
+var Listeners = /** @class */ (function () {
     function Listeners() {
         this._listeners = [];
     }

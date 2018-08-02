@@ -1,4 +1,4 @@
-var JsonHelper = (function () {
+var JsonHelper = /** @class */ (function () {
     function JsonHelper() {
     }
     JsonHelper.validate = function (stringObj) {

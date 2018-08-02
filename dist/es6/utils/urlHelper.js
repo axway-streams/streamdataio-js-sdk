@@ -1,4 +1,4 @@
-var UrlHelper = (function () {
+var UrlHelper = /** @class */ (function () {
     function UrlHelper() {
     }
     UrlHelper.urlToString = function (protocol, hostname, port) {

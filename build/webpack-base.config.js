@@ -8,8 +8,7 @@ const DESTINATION = path.resolve(ROOT, 'dist');
 const BUNDLES = DESTINATION + '/bundles';
 const LIB_NAME = 'streamdataio';
 
-module.exports = function (target, entities, addSuffix)
-{
+module.exports = function (target, entities, addSuffix) {
   let entries = {};
   let entry = LIB_NAME;
   if (addSuffix) {
@@ -20,20 +19,20 @@ module.exports = function (target, entities, addSuffix)
 
   return {
     context: SRC,
-    target : target,
-    entry  : entries,
-
-    output : {
-      filename      : "[name].js",
-      path          : BUNDLES,
-      library       : LIB_NAME,
-      libraryTarget : 'umd',
+    target: target,
+    entry: entries,
+    mode: 'production',
+    output: {
+      filename: "[name].js",
+      path: BUNDLES,
+      library: LIB_NAME,
+      libraryTarget: 'umd',
       umdNamedDefine: true
     }
     ,
     resolve: {
       extensions: ['.ts', '.js'],
-      modules   : [
+      modules: [
         SRC,
         'node_modules',
         'typings'
@@ -44,37 +43,34 @@ module.exports = function (target, entities, addSuffix)
     plugins: [
       new webpack.DefinePlugin({
         NODE: JSON.stringify(target === 'node')
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        dead_code: true,
-        minimize : true,
-        sourceMap: true,
-        include  : /\.min\.js$/,
       })
     ],
-    module : {
+    optimization: {
+      minimize: false
+    },
+    module: {
       rules: [
         /****************
          * PRE-LOADERS
          *****************/
         {
           enforce: 'pre',
-          test   : /\.js$/,
-          use    : 'source-map-loader'
+          test: /\.js$/,
+          use: 'source-map-loader'
         },
         {
           enforce: 'pre',
-          test   : /\.ts$/,
+          test: /\.ts$/,
           exclude: /node_modules/,
-          use    : 'tslint-loader'
+          use: 'tslint-loader'
         },
         /****************
          * LOADERS
          *****************/
         {
-          test   : /\.ts$/,
+          test: /\.ts$/,
           exclude: /node_modules/,
-          use    : 'awesome-typescript-loader'
+          use: 'awesome-typescript-loader'
         }
       ]
     }

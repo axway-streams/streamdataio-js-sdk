@@ -1,5 +1,5 @@
 import { Logger } from './logger';
-var Preconditions = (function () {
+var Preconditions = /** @class */ (function () {
     function Preconditions() {
     }
     /**

@@ -7,15 +7,15 @@ var logger_1 = require("./utils/logger");
 var config_1 = require("./configuration/config");
 var streamDataError_1 = require("./errors/streamDataError");
 var streamDataUrl_1 = require("./sse/streamDataUrl");
-var StreamData = (function () {
-    function StreamData(url, appToken, headers, authStragety) {
+var StreamData = /** @class */ (function () {
+    function StreamData(_url, _appToken, _headers, _authStrategy) {
+        this._url = _url;
+        this._appToken = _appToken;
+        this._headers = _headers;
+        this._authStrategy = _authStrategy;
         // Build internal configuration
-        preconditions_1.Preconditions.checkNotNull(url, 'url cannot be null.');
-        preconditions_1.Preconditions.checkNotNull(appToken, 'appToken cannot be null.');
-        this._url = url;
-        this._token = appToken;
-        this._headers = headers ? headers : [];
-        this._authStrategy = authStragety;
+        preconditions_1.Preconditions.checkNotNull(this._url, 'url cannot be null.');
+        preconditions_1.Preconditions.checkNotNull(this._appToken, 'appToken cannot be null.');
         // Init listeners
         this._openListeners = new listeners_1.Listeners();
         this._dataListeners = new listeners_1.Listeners();
@@ -94,7 +94,7 @@ var StreamData = (function () {
     StreamData.prototype._decorate = function (url, headers) {
         preconditions_1.Preconditions.checkNotNull(url, 'url cannot be null');
         var signedUrl = this._authStrategy ? this._authStrategy.signUrl(url) : url;
-        var clientUrl = new streamDataUrl_1.StreamDataUrl(signedUrl, this._token, headers);
+        var clientUrl = new streamDataUrl_1.StreamDataUrl(signedUrl, this._appToken, headers);
         var streamdataUrl = this.server.getFullUrl(clientUrl);
         logger_1.Logger.debug('converted url :' + streamdataUrl);
         return streamdataUrl;

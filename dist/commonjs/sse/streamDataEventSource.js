@@ -5,11 +5,8 @@ var jsonHelper_1 = require("../utils/jsonHelper");
 if (NODE) {
     var EventSource = require('eventsource');
 }
-else {
-    var EventSource = window && window.EventSource;
-}
 // ************************************
-var StreamDataEventSource = (function () {
+var StreamDataEventSource = /** @class */ (function () {
     function StreamDataEventSource(url) {
         this._sse = new EventSource(url);
     }
@@ -79,15 +76,12 @@ var StreamDataEventSource = (function () {
     return StreamDataEventSource;
 }());
 exports.StreamDataEventSource = StreamDataEventSource;
-var EventType = (function () {
-    function EventType() {
-    }
-    return EventType;
-}());
-EventType.OPEN = 'open';
-EventType.ERROR = 'error';
-EventType.DATA = 'data';
-EventType.PATCH = 'patch';
-EventType.MONITOR = 'monitor';
-exports.EventType = EventType;
+var EventType;
+(function (EventType) {
+    EventType["OPEN"] = "open";
+    EventType["ERROR"] = "error";
+    EventType["DATA"] = "data";
+    EventType["PATCH"] = "patch";
+    EventType["MONITOR"] = "monitor";
+})(EventType = exports.EventType || (exports.EventType = {}));
 //# sourceMappingURL=streamDataEventSource.js.map

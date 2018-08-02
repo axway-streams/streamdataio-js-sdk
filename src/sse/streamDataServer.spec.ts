@@ -1,5 +1,5 @@
-import {StreamDataUrl} from './streamDataUrl';
-import {StreamDataServer} from './streamDataServer';
+import {StreamDataUrl} from 'sse/streamDataUrl';
+import {StreamDataServer} from 'sse/streamDataServer';
 describe('StreamDataServer', function () {
 
   describe('Constructor', function () {

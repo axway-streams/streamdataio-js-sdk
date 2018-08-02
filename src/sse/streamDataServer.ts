@@ -1,5 +1,5 @@
-import {UrlHelper} from '../utils/urlHelper';
-import {StreamDataUrl} from './streamDataUrl';
+import {UrlHelper} from 'utils/urlHelper';
+import {StreamDataUrl} from 'sse/streamDataUrl';
 
 export class StreamDataServer {
 

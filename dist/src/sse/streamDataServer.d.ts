@@ -1,4 +1,4 @@
-import { StreamDataUrl } from './streamDataUrl';
+import { StreamDataUrl } from 'sse/streamDataUrl';
 export declare class StreamDataServer {
     protocol: string;
     hostname: string;

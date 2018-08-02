@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var urlHelper_1 = require("../utils/urlHelper");
-var StreamDataServer = (function () {
+var StreamDataServer = /** @class */ (function () {
     function StreamDataServer(protocol, hostname, port) {
         this.protocol = protocol;
         this.hostname = hostname;

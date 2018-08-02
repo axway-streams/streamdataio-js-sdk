@@ -1,4 +1,4 @@
-import {UrlHelper} from './urlHelper';
+import {UrlHelper} from 'utils/urlHelper';
 describe('UrlHelper', function () {
 
   describe('urlToString', function () {

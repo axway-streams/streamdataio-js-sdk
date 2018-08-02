@@ -1,6 +1,6 @@
 import { Preconditions } from '../utils/preconditions';
 import { Logger } from '../utils/logger';
-var Listeners = (function () {
+var Listeners = /** @class */ (function () {
     function Listeners() {
         this._listeners = [];
     }

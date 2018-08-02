@@ -101,20 +101,23 @@
 					<a name="createeventsource" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> create<wbr>Event<wbr>Source</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Event<wbr>Source<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, appToken<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, headers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, authStragety<span class="tsd-signature-symbol">?: </span><a href="../interfaces/streamdataauthstrategy.html" class="tsd-signature-type">StreamDataAuthStrategy</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="streamdata.html" class="tsd-signature-type">StreamData</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Event<wbr>Source<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, appToken<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, headers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, authStrategy<span class="tsd-signature-symbol">?: </span><a href="../interfaces/streamdataauthstrategy.html" class="tsd-signature-type">StreamDataAuthStrategy</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="streamdata.html" class="tsd-signature-type">StreamData</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/486e76f/src/index.ts#L35">index.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/0022d0a/src/index.ts#L37">index.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create a new instance of the <code>StreamDataEventSource</code> prototype.</p>
-								</div>
-								<p>The <code>StreamDataEventSource</code> is the main entry point for establishing Server Sent Event connection to a targeted JSON REST service URL.</p>
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd><p>Since version 2.1.0. Use bar instead.</p>
+										<p>Create a new instance of the <code>StreamDataEventSource</code> prototype.</p>
+										<p>The <code>StreamDataEventSource</code> is the main entry point for establishing Server Sent Event connection to a targeted JSON REST service URL.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -127,6 +130,9 @@
 								</li>
 								<li>
 									<h5>appToken: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Mandatory. The application token to authentify the request</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> headers: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
@@ -135,7 +141,19 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> authStragety: <a href="../interfaces/streamdataauthstrategy.html" class="tsd-signature-type">StreamDataAuthStrategy</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> authStrategy: <a href="../interfaces/streamdataauthstrategy.html" class="tsd-signature-type">StreamDataAuthStrategy</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Optional. An object which will enable HMAC signature of the request. You can create this object as follow:</p>
+										<pre><code>
+// setup headers
+var headers = [];
+// setup signatureStrategy
+var signatureStrategy = AuthStrategy.newSignatureStrategy('NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1','NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi');
+// instantiate an eventSource
+var eventSource = streamdataio.createEventSource('http://myRestservice.com/stocks','NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1',headers,signatureStrategy);
+
+</code></pre>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="streamdata.html" class="tsd-signature-type">StreamData</a></h4>
@@ -155,10 +173,10 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
-						<a href="../enums/loglevel.html" class="tsd-kind-icon">Log<wbr>Level</a>
+						<a href="../enums/eventtype.html" class="tsd-kind-icon">Event<wbr>Type</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="eventtype.html" class="tsd-kind-icon">Event<wbr>Type</a>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/loglevel.html" class="tsd-kind-icon">Log<wbr>Level</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="jsonhelper.html" class="tsd-kind-icon">Json<wbr>Helper</a>
@@ -225,9 +243,6 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/streamdataauthstrategy.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Auth<wbr>Strategy</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-not-exported">
-						<a href="../interfaces/streamdatawindow.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Window</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#streamdatasource" class="tsd-kind-icon">Stream<wbr>Data<wbr>Source</a>

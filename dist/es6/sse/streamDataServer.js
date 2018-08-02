@@ -1,5 +1,5 @@
 import { UrlHelper } from '../utils/urlHelper';
-var StreamDataServer = (function () {
+var StreamDataServer = /** @class */ (function () {
     function StreamDataServer(protocol, hostname, port) {
         this.protocol = protocol;
         this.hostname = hostname;

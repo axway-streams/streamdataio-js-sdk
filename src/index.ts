@@ -1,7 +1,7 @@
-import {Preconditions} from './utils/preconditions';
-import {Logger} from './utils/logger';
-import {StreamData} from './streamData';
-import {StreamDataAuthStrategy} from './auth/streamDataAuthStrategy';
+import {Preconditions} from 'utils/preconditions';
+import {Logger} from 'utils/logger';
+import {StreamData} from 'streamData';
+import {StreamDataAuthStrategy} from 'auth/streamDataAuthStrategy';
 
 /**
  * Streamdata.io JavaScript SDK
@@ -9,6 +9,7 @@ import {StreamDataAuthStrategy} from './auth/streamDataAuthStrategy';
 export class StreamDataIo {
 
   /**
+   *
    * <p>Create a new instance of the <code>StreamDataEventSource</code> prototype.</p>
    *
    * <p>The <code>StreamDataEventSource</code> is the main entry point for establishing Server Sent Event connection to a targeted JSON REST service URL.</p>
@@ -16,7 +17,7 @@ export class StreamDataIo {
    * @param {String} url Mandatory. The targeted REST URL is formatted as follow:
    * <pre><code>protocol://url(:port)(/localpath(?queryparameters))</code></pre>
    *
-   * @param {String} token Mandatory. The application token to authentify the request
+   * @param {String} appToken Mandatory. The application token to authentify the request
    *
    * @param {Array} headers Optional. Any specific headers that have to be added to the request. It must be an array with the following structure:<code>['Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==']</code>
    *
@@ -32,7 +33,7 @@ export class StreamDataIo {
    * </code></pre>
    * @returns {StreamDataEventSource}
    */
-  public static createEventSource(url: string, appToken: string, headers?: string[], authStragety?: StreamDataAuthStrategy) {
+  public static createEventSource(url: string, appToken: string, headers?: string[], authStrategy?: StreamDataAuthStrategy) {
     Preconditions.checkNotNull(url, 'url cannot be null');
 
     if (!(url.lastIndexOf('http://', 0) === 0)
@@ -42,7 +43,7 @@ export class StreamDataIo {
       Logger.warn('url has no default protocol defined. Add http:// as a default protocol.');
     }
 
-    return new StreamData(url, appToken, headers, authStragety);
+    return new StreamData(url, appToken, headers, authStrategy);
   }
 }
 

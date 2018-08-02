@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = require("./logger");
-var Preconditions = (function () {
+var Preconditions = /** @class */ (function () {
     function Preconditions() {
     }
     /**

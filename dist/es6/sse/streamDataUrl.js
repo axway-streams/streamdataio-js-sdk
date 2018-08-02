@@ -1,4 +1,4 @@
-var StreamDataUrl = (function () {
+var StreamDataUrl = /** @class */ (function () {
     function StreamDataUrl(url, token, headers) {
         // Sanitize client url
         this.clientUrl = url;
@@ -16,9 +16,9 @@ var StreamDataUrl = (function () {
     StreamDataUrl.prototype.toString = function () {
         return this.clientUrl;
     };
+    StreamDataUrl.X_SD_HEADER = 'X-Sd-Header';
+    StreamDataUrl.X_SD_TOKEN = 'X-Sd-Token';
     return StreamDataUrl;
 }());
 export { StreamDataUrl };
-StreamDataUrl.X_SD_HEADER = 'X-Sd-Header';
-StreamDataUrl.X_SD_TOKEN = 'X-Sd-Token';
 //# sourceMappingURL=streamDataUrl.js.map

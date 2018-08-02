@@ -1,21 +1,15 @@
-import {StreamDataEventSource} from './sse/streamDataEventSource';
-import {Listeners} from './events/listeners';
-import {Preconditions} from './utils/preconditions';
-import {Logger} from './utils/logger';
-import {DataEvent, MonitorEvent, OpenEvent, PatchEvent} from './sse/streamDataEvents';
-import {DefaultStreamDataServer} from './configuration/config';
-import {StreamDataError} from './errors/streamDataError';
-import {StreamDataServer} from './sse/streamDataServer';
-import {StreamDataUrl} from './sse/streamDataUrl';
-import {StreamDataAuthStrategy} from './auth/streamDataAuthStrategy';
+import {StreamDataEventSource} from 'sse/streamDataEventSource';
+import {Listeners} from 'events/listeners';
+import {Preconditions} from 'utils/preconditions';
+import {Logger} from 'utils/logger';
+import {DataEvent, MonitorEvent, OpenEvent, PatchEvent} from 'sse/streamDataEvents';
+import {DefaultStreamDataServer} from 'configuration/config';
+import {StreamDataError} from 'errors/streamDataError';
+import {StreamDataServer} from 'sse/streamDataServer';
+import {StreamDataUrl} from 'sse/streamDataUrl';
+import {StreamDataAuthStrategy} from 'auth/streamDataAuthStrategy';
 
 export class StreamData {
-
-  // Configuration
-  private _url: string;
-  private _token: string;
-  private _headers: string[];
-  private _authStrategy: StreamDataAuthStrategy;
 
   // Listeners
   private _openListeners: Listeners<any>;
@@ -28,16 +22,11 @@ export class StreamData {
   private _sse: StreamDataEventSource;
   public server: StreamDataServer;
 
-  constructor(url: string, appToken: string, headers?: string[], authStragety?: StreamDataAuthStrategy) {
+  constructor(private _url: string, private _appToken: string, private _headers?: string[], private _authStrategy?: StreamDataAuthStrategy) {
 
     // Build internal configuration
-    Preconditions.checkNotNull(url, 'url cannot be null.');
-    Preconditions.checkNotNull(appToken, 'appToken cannot be null.');
-
-    this._url = url;
-    this._token = appToken;
-    this._headers = headers ? headers : [];
-    this._authStrategy = authStragety;
+    Preconditions.checkNotNull(this._url, 'url cannot be null.');
+    Preconditions.checkNotNull(this._appToken, 'appToken cannot be null.');
 
     // Init listeners
     this._openListeners = new Listeners<any>();
@@ -135,7 +124,7 @@ export class StreamData {
     Preconditions.checkNotNull(url, 'url cannot be null');
 
     let signedUrl = this._authStrategy ? this._authStrategy.signUrl(url) : url;
-    let clientUrl = new StreamDataUrl(signedUrl, this._token, headers);
+    let clientUrl = new StreamDataUrl(signedUrl, this._appToken, headers);
     let streamdataUrl = this.server.getFullUrl(clientUrl);
     Logger.debug('converted url :' + streamdataUrl);
     return streamdataUrl;

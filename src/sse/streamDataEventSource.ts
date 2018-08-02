@@ -1,9 +1,6 @@
-import {Logger} from '../utils/logger';
-import {DataEvent, ErrorEvent, MonitorEvent, OpenEvent, PatchEvent} from './streamDataEvents';
-import {JsonHelper} from '../utils/jsonHelper';
-
-import IEventSourceStatic = sse.IEventSourceStatic;
-import IOnMessageEvent = sse.IOnMessageEvent;
+import {Logger} from 'utils/logger';
+import {DataEvent, ErrorEvent, EventType, MonitorEvent, OpenEvent, PatchEvent} from 'sse/streamDataEvents';
+import {JsonHelper} from 'utils/jsonHelper';
 
 // ************************************
 // EventSource constructor handling
@@ -11,20 +8,15 @@ import IOnMessageEvent = sse.IOnMessageEvent;
 // Webpack Defined Plugin Variable
 declare let NODE: boolean;
 if (NODE) {
-  var EventSource: IEventSourceStatic = require('eventsource');
-} else {
-  var EventSource: IEventSourceStatic = window && (<StreamDataWindow>window).EventSource;
+  var EventSource = require('eventsource');
 }
 
-interface StreamDataWindow extends Window {
-  EventSource: IEventSourceStatic;
-}
 // ************************************
 
 export class StreamDataEventSource {
 
   // SSE
-  private _sse: sse.IEventSourceStatic;
+  private readonly _sse: EventSource;
 
   constructor(url: string) {
     this._sse = new EventSource(url);
@@ -48,7 +40,7 @@ export class StreamDataEventSource {
   }
 
   public addErrorListener(onErrorCallback: (event: ErrorEvent) => void, context?: any) {
-    this._sse.addEventListener(EventType.ERROR, function (messageEvent: sse.IOnMessageEvent) {
+    this._sse.addEventListener(EventType.ERROR, function (messageEvent: MessageEvent) {
       let error = messageEvent ? JsonHelper.parse((messageEvent.data)) : null;
       if (context) {
         onErrorCallback.apply(context, [{error: error} as ErrorEvent]);
@@ -59,7 +51,7 @@ export class StreamDataEventSource {
   }
 
   public addDataListener(onDataCallback: (event: DataEvent) => void, context?: any) {
-    this._sse.addEventListener(EventType.DATA, function (messageEvent: sse.IOnMessageEvent) {
+    this._sse.addEventListener(EventType.DATA, function (messageEvent: MessageEvent) {
       let data = messageEvent ? JsonHelper.parse((messageEvent.data)) : null;
       if (context) {
         onDataCallback.apply(context, [{data: data} as DataEvent]);
@@ -70,7 +62,7 @@ export class StreamDataEventSource {
   }
 
   public addPatchListener(onPatchCallback: (event: PatchEvent) => void, context?: any) {
-    this._sse.addEventListener(EventType.PATCH, function (messageEvent: sse.IOnMessageEvent) {
+    this._sse.addEventListener(EventType.PATCH, function (messageEvent: MessageEvent) {
       let patch = messageEvent ? JsonHelper.parse((messageEvent.data)) : null;
       if (context) {
         onPatchCallback.apply(context, [{patch: patch} as PatchEvent]);
@@ -81,7 +73,7 @@ export class StreamDataEventSource {
   }
 
   public addMonitorListener(onMonitorCallback: (event: MonitorEvent) => void, context?: any) {
-    this._sse.addEventListener(EventType.MONITOR, function (messageEvent: sse.IOnMessageEvent) {
+    this._sse.addEventListener(EventType.MONITOR, function (messageEvent: MessageEvent) {
       let monitor = messageEvent ? JsonHelper.parse((messageEvent.data)) : null;
       if (context) {
         onMonitorCallback.apply(context, [{data: monitor} as MonitorEvent]);
@@ -95,13 +87,4 @@ export class StreamDataEventSource {
     return this._sse.readyState === EventSource.OPEN;
   }
 
-}
-
-export class EventType {
-
-  public static readonly OPEN = 'open';
-  public static readonly ERROR = 'error';
-  public static readonly DATA = 'data';
-  public static readonly PATCH = 'patch';
-  public static readonly MONITOR = 'monitor';
 }

@@ -1,10 +1,12 @@
-import { StreamData } from './streamData';
-import { StreamDataAuthStrategy } from './auth/streamDataAuthStrategy';
+import { StreamData } from 'streamData';
+import { StreamDataAuthStrategy } from 'auth/streamDataAuthStrategy';
 /**
  * Streamdata.io JavaScript SDK
  */
 export declare class StreamDataIo {
     /**
+     * @deprecated Since version 2.1.0. Use bar instead.
+     *
      * <p>Create a new instance of the <code>StreamDataEventSource</code> prototype.</p>
      *
      * <p>The <code>StreamDataEventSource</code> is the main entry point for establishing Server Sent Event connection to a targeted JSON REST service URL.</p>
@@ -12,7 +14,7 @@ export declare class StreamDataIo {
      * @param {String} url Mandatory. The targeted REST URL is formatted as follow:
      * <pre><code>protocol://url(:port)(/localpath(?queryparameters))</code></pre>
      *
-     * @param {String} token Mandatory. The application token to authentify the request
+     * @param {String} appToken Mandatory. The application token to authentify the request
      *
      * @param {Array} headers Optional. Any specific headers that have to be added to the request. It must be an array with the following structure:<code>['Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==']</code>
      *
@@ -28,6 +30,6 @@ export declare class StreamDataIo {
      * </code></pre>
      * @returns {StreamDataEventSource}
      */
-    static createEventSource(url: string, appToken: string, headers?: string[], authStragety?: StreamDataAuthStrategy): StreamData;
+    static createEventSource(url: string, appToken: string, headers?: string[], authStrategy?: StreamDataAuthStrategy): StreamData;
 }
 export declare const createEventSource: typeof StreamDataIo.createEventSource;

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var JsonHelper = (function () {
+var JsonHelper = /** @class */ (function () {
     function JsonHelper() {
     }
     JsonHelper.validate = function (stringObj) {

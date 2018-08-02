@@ -1,4 +1,4 @@
-import {JsonHelper} from './jsonHelper';
+import {JsonHelper} from 'utils/jsonHelper';
 export enum LogLevel {
   ERROR,
   WARN,

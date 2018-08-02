@@ -6,10 +6,12 @@ var streamData_1 = require("./streamData");
 /**
  * Streamdata.io JavaScript SDK
  */
-var StreamDataIo = (function () {
+var StreamDataIo = /** @class */ (function () {
     function StreamDataIo() {
     }
     /**
+     * @deprecated Since version 2.1.0. Use bar instead.
+     *
      * <p>Create a new instance of the <code>StreamDataEventSource</code> prototype.</p>
      *
      * <p>The <code>StreamDataEventSource</code> is the main entry point for establishing Server Sent Event connection to a targeted JSON REST service URL.</p>
@@ -17,7 +19,7 @@ var StreamDataIo = (function () {
      * @param {String} url Mandatory. The targeted REST URL is formatted as follow:
      * <pre><code>protocol://url(:port)(/localpath(?queryparameters))</code></pre>
      *
-     * @param {String} token Mandatory. The application token to authentify the request
+     * @param {String} appToken Mandatory. The application token to authentify the request
      *
      * @param {Array} headers Optional. Any specific headers that have to be added to the request. It must be an array with the following structure:<code>['Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==']</code>
      *
@@ -33,7 +35,7 @@ var StreamDataIo = (function () {
      * </code></pre>
      * @returns {StreamDataEventSource}
      */
-    StreamDataIo.createEventSource = function (url, appToken, headers, authStragety) {
+    StreamDataIo.createEventSource = function (url, appToken, headers, authStrategy) {
         preconditions_1.Preconditions.checkNotNull(url, 'url cannot be null');
         if (!(url.lastIndexOf('http://', 0) === 0)
             && !(url.lastIndexOf('https://', 0) === 0)) {
@@ -41,7 +43,7 @@ var StreamDataIo = (function () {
             url = 'http://' + url;
             logger_1.Logger.warn('url has no default protocol defined. Add http:// as a default protocol.');
         }
-        return new streamData_1.StreamData(url, appToken, headers, authStragety);
+        return new streamData_1.StreamData(url, appToken, headers, authStrategy);
     };
     return StreamDataIo;
 }());

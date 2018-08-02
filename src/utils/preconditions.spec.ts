@@ -1,5 +1,5 @@
-import {Preconditions} from './preconditions';
-import {Logger} from './logger';
+import {Preconditions} from 'utils/preconditions';
+import {Logger} from 'utils/logger';
 describe('Preconditions', function () {
 
   describe('CheckNotNull', function () {

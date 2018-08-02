@@ -1,4 +1,4 @@
-import {StreamDataError} from "./streamDataError";
+import {StreamDataError} from "errors/streamDataError";
 describe('StreamDataError', () => {
   it('should have a type', () => {
     let error = new StreamDataError('type', null, null);
