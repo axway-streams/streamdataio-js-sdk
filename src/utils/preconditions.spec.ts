@@ -1,65 +1,95 @@
-import {Preconditions} from 'utils/preconditions';
-import {Logger} from 'utils/logger';
-describe('Preconditions', function () {
+import {Logger} from './logger';
+import {Preconditions} from './preconditions';
 
-  describe('CheckNotNull', function () {
-    it('should not throw an exception when the value is not null', function () {
+describe('Preconditions', () => {
+
+  describe('CheckNotNull', () => {
+    it('should not throw an exception when the value is not null', () => {
       // GIVEN
-      var notNullValue: string  = 'Hello World!';
+      const notNullValue: string = 'Hello World!';
 
+      // THEN
       // see https://ajsblackbelt.wordpress.com/2014/05/18/jasmine-tests-expect-tothrow/
-      expect(function () {
+      expect(() => {
         Preconditions.checkNotNull(notNullValue, 'notNullValue cannot be null');
-      }).not.toThrow();
+      }).not.toThrow('notNullValue cannot be null');
     });
 
-    it('should throw an exception when the value is null', function () {
+    it('should throw an exception when the value is null', () => {
       // GIVEN
-      var nullValue: string = null;
+      const nullValue: string = null;
 
-      expect(function () {
+      // THEN
+      expect(() => {
         Preconditions.checkNotNull(nullValue, 'nullValue cannot be null');
-      }).toThrow();
+      }).toThrow('nullValue cannot be null');
     });
 
-    it('should throw an exception when the value is undefined', function () {
+    it('should throw an exception when the value is undefined', () => {
       // GIVEN
-      var nullValue: string;
+      let nullValue: string;
 
-      expect(function () {
+      // THEN
+      expect(() => {
         Preconditions.checkNotNull(nullValue, 'nullValue cannot be null');
-      }).toThrow();
+      }).toThrow('nullValue cannot be null');
+    });
+
+    it('should throw an exception with default message when the value is null', () => {
+      // GIVEN
+      let nullValue: string;
+
+      // THEN
+      expect(() => {
+        Preconditions.checkNotNull(nullValue, null);
+      }).toThrow('value cannot be null');
     });
   });
 
-  describe('checkExpression', function () {
-    it('should not throw an exception when the expression is verified', function () {
-      // GIVEN
-      var hello = 'Hello';
+  describe('checkExpression', () => {
+    const value = 'Hello';
+    const message = 'hello must be equal to Hello';
 
-      expect(function () {
+    it('should not throw an exception when the expression is verified', () => {
+      // GIVEN
+      const hello = 'Hello';
+
+      // THEN
+      expect(() => {
         Preconditions.checkExpression(hello === 'Hello', 'hello must be equal to Hello');
-      }).not.toThrow();
+      }).not.toThrow('hello must be equal to Hello');
     });
 
-    it('should throw an exception when the expression is not verified', function () {
+    it('should throw an exception when the expression is not verified', () => {
       // GIVEN
-      var hello = 'Hello';
+      const hello = 'Hello';
 
-      expect(function () {
+      // THEN
+      expect(() => {
         Preconditions.checkExpression(hello !== 'Hello', 'hello must be equal to Hello');
-      }).toThrow();
+      }).toThrow('hello must be equal to Hello');
+    });
+
+    it('should throw an exception with default message when the expression is not verified', () => {
+      // GIVEN
+      const hello = 'Hello';
+
+      // THEN
+      expect(() => {
+        Preconditions.checkExpression(hello !== 'Hello', null);
+      }).toThrow('expression is not valid');
     });
   });
 
-  describe('deprecated', function () {
-    it('should log a warning when called', function () {
+  describe('deprecated', () => {
+    it('should log a warning when called', () => {
       // GIVEN
       spyOn(Logger, 'warn');
 
       // WHEN
       Preconditions.deprecated('foo', 'foo is not used anymore');
 
+      // THEN
       expect(Logger.warn).toHaveBeenCalled();
     });
   });

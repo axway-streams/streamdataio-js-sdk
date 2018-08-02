@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC = path.resolve(ROOT, 'src');
@@ -37,16 +38,20 @@ module.exports = function (target, entities, addSuffix) {
         'node_modules',
         'typings'
       ]
-    }
-    ,
+    },
     devtool: 'source-map',
     plugins: [
       new webpack.DefinePlugin({
-        NODE: JSON.stringify(target === 'node')
+        NODE_ENVIRONMENT: JSON.stringify(target === 'node')
       })
     ],
     optimization: {
-      minimize: false
+      minimizer: [
+        new UglifyJsPlugin({
+          sourceMap: true,
+          include: /\.min\.js$/,
+        })
+      ]
     },
     module: {
       rules: [

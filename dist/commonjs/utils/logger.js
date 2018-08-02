@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var jsonHelper_1 = require("./jsonHelper");
+var json_helper_1 = require("./json-helper");
 var LogLevel;
 (function (LogLevel) {
     LogLevel[LogLevel["ERROR"] = 0] = "ERROR";
@@ -11,20 +11,19 @@ var LogLevel;
 var Logger = /** @class */ (function () {
     function Logger() {
     }
-    /**
-     * @memberOf Logger#
-     * @param {number} newlevel
-     */
-    Logger.setLevel = function (newLevel) {
-        this._level = newLevel;
-    };
     Logger.debug = function (msg) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        if (this._level >= LogLevel.DEBUG && this._console && this._console.log) {
-            this._console.log(this._formatLog(msg, args));
+        if (this.level >= LogLevel.DEBUG && this.console) {
+            var debugMessage = this._formatLog(LogLevel.DEBUG, msg, args);
+            if (this.console.debug) {
+                this.console.debug(debugMessage);
+            }
+            else {
+                this.console.log(debugMessage);
+            }
         }
     };
     Logger.info = function (msg) {
@@ -32,8 +31,8 @@ var Logger = /** @class */ (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        if (this._level >= LogLevel.INFO && this._console && this._console.info) {
-            this._console.info(this._formatLog(msg, args));
+        if (this.level >= LogLevel.INFO && this.console && this.console.info) {
+            this.console.info(this._formatLog(LogLevel.INFO, msg, args));
         }
     };
     Logger.warn = function (msg) {
@@ -41,8 +40,8 @@ var Logger = /** @class */ (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        if (this._level >= LogLevel.WARN && this._console && this._console.warn) {
-            this._console.warn(this._formatLog(msg, args));
+        if (this.level >= LogLevel.WARN && this.console && this.console.warn) {
+            this.console.warn(this._formatLog(LogLevel.WARN, msg, args));
         }
     };
     Logger.error = function (msg) {
@@ -50,40 +49,27 @@ var Logger = /** @class */ (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        if (this._level >= LogLevel.ERROR && this._console && this._console.error) {
-            this._console.error(this._formatLog(msg, args));
+        if (this.level >= LogLevel.ERROR && this.console && this.console.error) {
+            this.console.error(this._formatLog(LogLevel.ERROR, msg, args));
         }
     };
     /**
      * @private
      * @memberOf Logger#
      */
-    Logger._formatLog = function (pattern, args) {
-        return pattern.replace ? pattern.replace(/{(\d+)}/g, function (match, index) {
+    Logger._formatLog = function (level, pattern, args) {
+        var replaceStr = pattern.replace(/{(\d+)}/g, function (match, index) {
             var replaced;
             if (args[index] && typeof args[index] === 'object' && args[index] instanceof Error) {
-                try {
-                    replaced = args[index]['message'];
-                    if (args[index]['stack']) {
-                        console.error(args[index]['stack']);
-                    }
+                if (args[index]['stack']) {
+                    replaced = args[index]['stack'];
                 }
-                catch (error) {
-                    replaced = args[index];
+                else {
+                    replaced = args[index]['name'] + ": " + args[index]['message'];
                 }
             }
             else if (args[index] && typeof args[index] === 'object') {
-                try {
-                    if (args[index].toString !== Object.prototype.toString) {
-                        replaced = args[index].toString();
-                    }
-                    else {
-                        replaced = jsonHelper_1.JsonHelper.stringify(args[index]);
-                    }
-                }
-                catch (error) {
-                    replaced = args[index];
-                }
+                replaced = json_helper_1.JsonHelper.stringify(args[index]);
             }
             else if (args[index] && typeof args[index] === 'function') {
                 replaced = 'function';
@@ -94,20 +80,20 @@ var Logger = /** @class */ (function () {
             else {
                 replaced = match;
             }
-            var replacedString = '' + replaced;
-            return replacedString.substring(0, Math.min(500, replacedString.length));
-        }) : pattern;
+            return replaced;
+        });
+        return "[" + LogLevel[level] + "] " + replaceStr;
     };
     /**
      * @private
      * @memberOf Logger#
      */
-    Logger._console = console;
+    Logger.console = console;
     /**
      * @private
      * @memberOf Logger#
      */
-    Logger._level = LogLevel.INFO;
+    Logger.level = LogLevel.INFO;
     return Logger;
 }());
 exports.Logger = Logger;

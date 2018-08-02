@@ -1,0 +1,11 @@
+{
+  "name": "Streamdata.io JS SDK",
+  "module": "umd",
+  "target": "es6",
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "hideGenerator": true,
+  "theme": "build/typedoc-streamdataio-theme",
+  "out": "dist/docs",
+  "mode": "file"
+}

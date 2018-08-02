@@ -5,3 +5,7 @@ src/**/*.js
 src/**/*.js.map
 ts-out
 *.log
+
+# Test
+coverage
+test-report.xml

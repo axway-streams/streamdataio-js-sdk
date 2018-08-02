@@ -1,4 +1,5 @@
-import {JsonHelper} from 'utils/jsonHelper';
+import {JsonHelper} from './json-helper';
+
 export enum LogLevel {
   ERROR,
   WARN,
@@ -12,72 +13,60 @@ export class Logger {
    * @private
    * @memberOf Logger#
    */
-  public static _console = console;
+  public static console = console;
 
   /**
    * @private
    * @memberOf Logger#
    */
-  private static _level = LogLevel.INFO;
+  public static level = LogLevel.INFO;
 
-  /**
-   * @memberOf Logger#
-   * @param {number} newlevel
-   */
-  public static setLevel(newLevel: LogLevel) {
-    this._level = newLevel;
-  }
 
   public static debug(msg: string, ...args: any[]) {
-    if (this._level >= LogLevel.DEBUG && this._console && this._console.log) {
-      this._console.log(this._formatLog(msg, args));
+    if (this.level >= LogLevel.DEBUG && this.console) {
+      let debugMessage = this._formatLog(LogLevel.DEBUG, msg, args);
+      if (this.console.debug) {
+        this.console.debug(debugMessage);
+      } else {
+        this.console.log(debugMessage);
+      }
     }
   }
 
   public static info(msg: string, ...args: any[]) {
-    if (this._level >= LogLevel.INFO && this._console && this._console.info) {
-      this._console.info(this._formatLog(msg, args));
+    if (this.level >= LogLevel.INFO && this.console && this.console.info) {
+      this.console.info(this._formatLog(LogLevel.INFO, msg, args));
     }
   }
 
   public static warn(msg: string, ...args: any[]) {
-    if (this._level >= LogLevel.WARN && this._console && this._console.warn) {
-      this._console.warn(this._formatLog(msg, args));
+    if (this.level >= LogLevel.WARN && this.console && this.console.warn) {
+      this.console.warn(this._formatLog(LogLevel.WARN, msg, args));
     }
   }
 
   public static error(msg: string, ...args: any[]) {
-    if (this._level >= LogLevel.ERROR && this._console && this._console.error) {
-      this._console.error(this._formatLog(msg, args));
+    if (this.level >= LogLevel.ERROR && this.console && this.console.error) {
+      this.console.error(this._formatLog(LogLevel.ERROR, msg, args));
     }
   }
+
 
   /**
    * @private
    * @memberOf Logger#
    */
-  private static _formatLog(pattern: string, args: any[]) {
-    return pattern.replace ? pattern.replace(/{(\d+)}/g, function (match, index) {
-      var replaced;
+  private static _formatLog(level: LogLevel, pattern: string, args: any[]) {
+    let replaceStr = pattern.replace(/{(\d+)}/g, (match, index) => {
+      let replaced;
       if (args[index] && typeof args[index] === 'object' && args[index] instanceof Error) {
-        try {
-          replaced = args[index]['message'];
-          if (args[index]['stack']) {
-            console.error(args[index]['stack']);
-          }
-        } catch (error) {
-          replaced = args[index];
+        if (args[index]['stack']) {
+          replaced = args[index]['stack'];
+        } else {
+          replaced = `${args[index]['name']}: ${args[index]['message']}`;
         }
       } else if (args[index] && typeof args[index] === 'object') {
-        try {
-          if (args[index].toString !== Object.prototype.toString) {
-            replaced = args[index].toString();
-          } else {
-            replaced = JsonHelper.stringify(args[index]);
-          }
-        } catch (error) {
-          replaced = args[index];
-        }
+        replaced = JsonHelper.stringify(args[index]);
       } else if (args[index] && typeof args[index] === 'function') {
         replaced = 'function';
       } else if (args[index]) {
@@ -85,8 +74,8 @@ export class Logger {
       } else {
         replaced = match;
       }
-      var replacedString = '' + replaced;
-      return replacedString.substring(0, Math.min(500, replacedString.length));
-    }) : pattern;
+      return replaced;
+    });
+    return `[${LogLevel[level]}] ${replaceStr}`;
   }
 }

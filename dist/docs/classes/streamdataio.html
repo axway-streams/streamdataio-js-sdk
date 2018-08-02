@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>StreamDataIo | streamdata.io SDK</title>
+	<title>StreamDataIo | Streamdata.io JS SDK</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -90,6 +90,8 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="streamdataio.html#createeventsource" class="tsd-kind-icon">create<wbr>Event<wbr>Source</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="streamdataio.html#subscribetotopic" class="tsd-kind-icon">subscribe<wbr>ToTopic</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="streamdataio.html#subscribetourl" class="tsd-kind-icon">subscribe<wbr>ToUrl</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,21 +103,21 @@
 					<a name="createeventsource" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> create<wbr>Event<wbr>Source</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Event<wbr>Source<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, appToken<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, headers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, authStrategy<span class="tsd-signature-symbol">?: </span><a href="../interfaces/streamdataauthstrategy.html" class="tsd-signature-type">StreamDataAuthStrategy</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="streamdata.html" class="tsd-signature-type">StreamData</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Event<wbr>Source<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, appToken<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, headers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, authStrategy<span class="tsd-signature-symbol">?: </span><a href="../interfaces/streamdataauthstrategy.html" class="tsd-signature-type">StreamdataAuthStrategy</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="streamdatalegacysubscriber.html" class="tsd-signature-type">StreamdataLegacySubscriber</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/0022d0a/src/index.ts#L37">index.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/streamdataio.ts#L39">streamdataio.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<dl class="tsd-comment-tags">
 									<dt>deprecated</dt>
-									<dd><p>Since version 2.1.0. Use bar instead.</p>
-										<p>Create a new instance of the <code>StreamDataEventSource</code> prototype.</p>
-										<p>The <code>StreamDataEventSource</code> is the main entry point for establishing Server Sent Event connection to a targeted JSON REST service URL.</p>
+									<dd><p>Since version 2.1.0. Use subscribeToUrl instead.</p>
+										<p>Create a new instance of the <code>StreamdataEventSource</code> prototype.</p>
+										<p>The <code>StreamdataEventSource</code> is the main entry point for establishing Server Sent Event connection to a targeted JSON REST service URL.</p>
 									</dd>
 								</dl>
 							</div>
@@ -141,7 +143,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> authStrategy: <a href="../interfaces/streamdataauthstrategy.html" class="tsd-signature-type">StreamDataAuthStrategy</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> authStrategy: <a href="../interfaces/streamdataauthstrategy.html" class="tsd-signature-type">StreamdataAuthStrategy</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional. An object which will enable HMAC signature of the request. You can create this object as follow:</p>
 										<pre><code>
@@ -156,7 +158,59 @@ var eventSource = streamdataio.createEventSource('http://myRestservice.com/stock
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="streamdata.html" class="tsd-signature-type">StreamData</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="streamdatalegacysubscriber.html" class="tsd-signature-type">StreamdataLegacySubscriber</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="subscribetotopic" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> subscribe<wbr>ToTopic</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">subscribe<wbr>ToTopic<span class="tsd-signature-symbol">(</span>topicId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, subscriberKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="streamdatatopicsubscriber.html" class="tsd-signature-type">StreamdataTopicSubscriber</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/streamdataio.ts#L68">streamdataio.ts:68</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>topicId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>subscriberKey: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="streamdatatopicsubscriber.html" class="tsd-signature-type">StreamdataTopicSubscriber</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="subscribetourl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> subscribe<wbr>ToUrl</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">subscribe<wbr>ToUrl<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, subscriberKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="streamdataurlsubscriber.html" class="tsd-signature-type">StreamdataUrlSubscriber</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/streamdataio.ts#L54">streamdataio.ts:54</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>subscriberKey: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="streamdataurlsubscriber.html" class="tsd-signature-type">StreamdataUrlSubscriber</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -188,16 +242,13 @@ var eventSource = streamdataio.createEventSource('http://myRestservice.com/stock
 						<a href="logger.html" class="tsd-kind-icon">Logger</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="mockstreamdataauthstrategy.html" class="tsd-kind-icon">Mock<wbr>Streamdata<wbr>Auth<wbr>Strategy</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="mockstreamdatasubscriber.html" class="tsd-kind-icon">Mock<wbr>Streamdata<wbr>Subscriber</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="preconditions.html" class="tsd-kind-icon">Preconditions</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="streamdata.html" class="tsd-kind-icon">Stream<wbr>Data</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="streamdataerror.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="streamdataeventsource.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Event<wbr>Source</a>
 					</li>
 				</ul>
 				<ul class="current">
@@ -207,54 +258,75 @@ var eventSource = streamdataio.createEventSource('http://myRestservice.com/stock
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="streamdataio.html#createeventsource" class="tsd-kind-icon">create<wbr>Event<wbr>Source</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="streamdataio.html#subscribetotopic" class="tsd-kind-icon">subscribe<wbr>ToTopic</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="streamdataio.html#subscribetourl" class="tsd-kind-icon">subscribe<wbr>ToUrl</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="streamdataserver.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Server</a>
+						<a href="streamdatalegacyerror.html" class="tsd-kind-icon">Streamdata<wbr>Legacy<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="streamdataurl.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Url</a>
+						<a href="streamdatalegacysubscriber.html" class="tsd-kind-icon">Streamdata<wbr>Legacy<wbr>Subscriber</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="urlhelper.html" class="tsd-kind-icon">Url<wbr>Helper</a>
+						<a href="streamdataproxyerror.html" class="tsd-kind-icon">Streamdata<wbr>Proxy<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/dataevent.html" class="tsd-kind-icon">Data<wbr>Event</a>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="streamdataproxysubscriber.html" class="tsd-kind-icon">Streamdata<wbr>Proxy<wbr>Subscriber</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/errorevent.html" class="tsd-kind-icon">Error<wbr>Event</a>
+					<li class=" tsd-kind-class">
+						<a href="streamdatatopicsubscriber.html" class="tsd-kind-icon">Streamdata<wbr>Topic<wbr>Subscriber</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/event.html" class="tsd-kind-icon">Event</a>
+					<li class=" tsd-kind-class">
+						<a href="streamdataurlsubscriber.html" class="tsd-kind-icon">Streamdata<wbr>Url<wbr>Subscriber</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="../interfaces/eventsourcewindow.html" class="tsd-kind-icon">Event<wbr>Source<wbr>Window</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="../interfaces/listener.html" class="tsd-kind-icon">Listener</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/monitorevent.html" class="tsd-kind-icon">Monitor<wbr>Event</a>
+						<a href="../interfaces/streamdataauthstrategy.html" class="tsd-kind-icon">Streamdata<wbr>Auth<wbr>Strategy</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/openevent.html" class="tsd-kind-icon">Open<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/patchevent.html" class="tsd-kind-icon">Patch<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/streamdataauthstrategy.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Auth<wbr>Strategy</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#errorcategory" class="tsd-kind-icon">Error<wbr>Category</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#streamdatasource" class="tsd-kind-icon">Stream<wbr>Data<wbr>Source</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="../globals.html#defaultstreamdataserver" class="tsd-kind-icon">Default<wbr>Stream<wbr>Data<wbr>Server</a>
+						<a href="../globals.html#defaultstreamdataproxyurl" class="tsd-kind-icon">Default<wbr>Stream<wbr>Data<wbr>ProxyURL</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#defaultstreamdataproxyvervion" class="tsd-kind-icon">Default<wbr>Stream<wbr>Data<wbr>Proxy<wbr>Vervion</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#eventsource" class="tsd-kind-icon">Event<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#legacystreamdataproxy" class="tsd-kind-icon">Legacy<wbr>Stream<wbr>Data<wbr>Proxy</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#node" class="tsd-kind-icon">NODE</a>
+						<a href="../globals.html#node_environment" class="tsd-kind-icon">NODE_<wbr>ENVIRONMENT</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#url" class="tsd-kind-icon">URL</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="../globals.html#createeventsource" class="tsd-kind-icon">create<wbr>Event<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#subscribetotopic" class="tsd-kind-icon">subscribe<wbr>ToTopic</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#subscribetourl" class="tsd-kind-icon">subscribe<wbr>ToUrl</a>
 					</li>
 				</ul>
 			</nav>

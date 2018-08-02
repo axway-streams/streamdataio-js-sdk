@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Logger | streamdata.io SDK</title>
+	<title>Logger | Streamdata.io JS SDK</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -82,7 +82,8 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="logger.html#_console" class="tsd-kind-icon">_console</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="logger.html#console" class="tsd-kind-icon">console</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="logger.html#level" class="tsd-kind-icon">level</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -91,7 +92,6 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="logger.html#debug" class="tsd-kind-icon">debug</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="logger.html#error" class="tsd-kind-icon">error</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="logger.html#info" class="tsd-kind-icon">info</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="logger.html#setlevel" class="tsd-kind-icon">set<wbr>Level</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="logger.html#warn" class="tsd-kind-icon">warn</a></li>
 							</ul>
 						</section>
@@ -101,12 +101,29 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
-					<a name="_console" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> _console</h3>
-					<div class="tsd-signature tsd-kind-icon">_console<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Console</span><span class="tsd-signature-symbol"> =&nbsp;console</span></div>
+					<a name="console" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> console</h3>
+					<div class="tsd-signature tsd-kind-icon">console<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Console</span><span class="tsd-signature-symbol"> =&nbsp;console</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/0022d0a/src/utils/logger.ts#L15">utils/logger.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/utils/logger.ts#L16">utils/logger.ts:16</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>memberof</dt>
+							<dd><p>Logger#</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="level" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> level</h3>
+					<div class="tsd-signature tsd-kind-icon">level<span class="tsd-signature-symbol">:</span> <a href="../enums/loglevel.html" class="tsd-signature-type">LogLevel</a><span class="tsd-signature-symbol"> =&nbsp;LogLevel.INFO</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/utils/logger.ts#L22">utils/logger.ts:22</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -130,7 +147,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/0022d0a/src/utils/logger.ts#L31">utils/logger.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/utils/logger.ts#L25">utils/logger.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -156,7 +173,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/0022d0a/src/utils/logger.ts#L49">utils/logger.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/utils/logger.ts#L48">utils/logger.ts:48</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -182,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/0022d0a/src/utils/logger.ts#L37">utils/logger.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/utils/logger.ts#L36">utils/logger.ts:36</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -199,36 +216,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="setlevel" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> set<wbr>Level</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Level<span class="tsd-signature-symbol">(</span>newLevel<span class="tsd-signature-symbol">: </span><a href="../enums/loglevel.html" class="tsd-signature-type">LogLevel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/0022d0a/src/utils/logger.ts#L27">utils/logger.ts:27</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>memberof</dt>
-									<dd><p>Logger#</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>newLevel: <a href="../enums/loglevel.html" class="tsd-signature-type">LogLevel</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="warn" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> warn</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
@@ -238,7 +225,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/0022d0a/src/utils/logger.ts#L43">utils/logger.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/streamdataio/streamdataio-js-sdk/blob/03e54e8/src/utils/logger.ts#L42">utils/logger.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -284,7 +271,10 @@
 						<a href="logger.html" class="tsd-kind-icon">Logger</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
-								<a href="logger.html#_console" class="tsd-kind-icon">_console</a>
+								<a href="logger.html#console" class="tsd-kind-icon">console</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="logger.html#level" class="tsd-kind-icon">level</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="logger.html#debug" class="tsd-kind-icon">debug</a>
@@ -296,9 +286,6 @@
 								<a href="logger.html#info" class="tsd-kind-icon">info</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="logger.html#setlevel" class="tsd-kind-icon">set<wbr>Level</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="logger.html#warn" class="tsd-kind-icon">warn</a>
 							</li>
 						</ul>
@@ -306,64 +293,76 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
+						<a href="mockstreamdataauthstrategy.html" class="tsd-kind-icon">Mock<wbr>Streamdata<wbr>Auth<wbr>Strategy</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="mockstreamdatasubscriber.html" class="tsd-kind-icon">Mock<wbr>Streamdata<wbr>Subscriber</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="preconditions.html" class="tsd-kind-icon">Preconditions</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="streamdata.html" class="tsd-kind-icon">Stream<wbr>Data</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="streamdataerror.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="streamdataeventsource.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Event<wbr>Source</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="streamdataio.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Io</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="streamdataserver.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Server</a>
+						<a href="streamdatalegacyerror.html" class="tsd-kind-icon">Streamdata<wbr>Legacy<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="streamdataurl.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Url</a>
+						<a href="streamdatalegacysubscriber.html" class="tsd-kind-icon">Streamdata<wbr>Legacy<wbr>Subscriber</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="urlhelper.html" class="tsd-kind-icon">Url<wbr>Helper</a>
+						<a href="streamdataproxyerror.html" class="tsd-kind-icon">Streamdata<wbr>Proxy<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/dataevent.html" class="tsd-kind-icon">Data<wbr>Event</a>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="streamdataproxysubscriber.html" class="tsd-kind-icon">Streamdata<wbr>Proxy<wbr>Subscriber</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/errorevent.html" class="tsd-kind-icon">Error<wbr>Event</a>
+					<li class=" tsd-kind-class">
+						<a href="streamdatatopicsubscriber.html" class="tsd-kind-icon">Streamdata<wbr>Topic<wbr>Subscriber</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/event.html" class="tsd-kind-icon">Event</a>
+					<li class=" tsd-kind-class">
+						<a href="streamdataurlsubscriber.html" class="tsd-kind-icon">Streamdata<wbr>Url<wbr>Subscriber</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="../interfaces/eventsourcewindow.html" class="tsd-kind-icon">Event<wbr>Source<wbr>Window</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="../interfaces/listener.html" class="tsd-kind-icon">Listener</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/monitorevent.html" class="tsd-kind-icon">Monitor<wbr>Event</a>
+						<a href="../interfaces/streamdataauthstrategy.html" class="tsd-kind-icon">Streamdata<wbr>Auth<wbr>Strategy</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/openevent.html" class="tsd-kind-icon">Open<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/patchevent.html" class="tsd-kind-icon">Patch<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/streamdataauthstrategy.html" class="tsd-kind-icon">Stream<wbr>Data<wbr>Auth<wbr>Strategy</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#errorcategory" class="tsd-kind-icon">Error<wbr>Category</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#streamdatasource" class="tsd-kind-icon">Stream<wbr>Data<wbr>Source</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="../globals.html#defaultstreamdataserver" class="tsd-kind-icon">Default<wbr>Stream<wbr>Data<wbr>Server</a>
+						<a href="../globals.html#defaultstreamdataproxyurl" class="tsd-kind-icon">Default<wbr>Stream<wbr>Data<wbr>ProxyURL</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#defaultstreamdataproxyvervion" class="tsd-kind-icon">Default<wbr>Stream<wbr>Data<wbr>Proxy<wbr>Vervion</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#eventsource" class="tsd-kind-icon">Event<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#legacystreamdataproxy" class="tsd-kind-icon">Legacy<wbr>Stream<wbr>Data<wbr>Proxy</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#node" class="tsd-kind-icon">NODE</a>
+						<a href="../globals.html#node_environment" class="tsd-kind-icon">NODE_<wbr>ENVIRONMENT</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#url" class="tsd-kind-icon">URL</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="../globals.html#createeventsource" class="tsd-kind-icon">create<wbr>Event<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#subscribetotopic" class="tsd-kind-icon">subscribe<wbr>ToTopic</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#subscribetourl" class="tsd-kind-icon">subscribe<wbr>ToUrl</a>
 					</li>
 				</ul>
 			</nav>

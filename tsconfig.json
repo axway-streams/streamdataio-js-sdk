@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "outDir": "dist",
+    "outDir": "dist/commonjs",
     "target": "es5",
     "module": "commonjs",
     "lib": [
@@ -12,7 +12,7 @@
     "noImplicitAny": true,
     "alwaysStrict": true,
     "declaration": true,
-    "declarationDir": "dist/src",
+    "declarationDir": "dist/types",
     "typeRoots": [
       "node_modules/@types"
     ]
@@ -23,6 +23,7 @@
   "exclude": [
     "dist",
     "node_modules",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/entry.ts"
   ]
 }

@@ -1,4 +1,4 @@
-import {Logger} from 'utils/logger';
+import {Logger} from './logger';
 
 export class Preconditions {
   /**
@@ -28,7 +28,7 @@ export class Preconditions {
     this.checkNotNull(functionName, 'functionName cannot be null');
     this.checkNotNull(message, 'message cannot be null');
 
-    Logger.warn('\'{0}\' is deprecated because \'{1}\'.', functionName, message);
+    Logger.warn('\'{0}\' is deprecated. \'{1}\'.', functionName, message);
 
   }
 

@@ -6,19 +6,18 @@ streamdata.io javascript sdk
 Introduction
 ============
 
-**<a href="http://streamdata.io" target="_blank">streamdata.io</a>** is a real-time cache proxy allowing you to poll standard public REST APIs and push updates to clients.
-But wait, there is more: streamdata.io keeps an history of modifications that occur on the data between two polling! This way, streamdata.io is able to give you the list of modifications which happened since last time you fetched the data.
+This Javascript SDK facilitates the usage of streamdata.io.
 
-In other words, streamdata.io is the perfect cache to dramatically reduce the bandwidth consumption to transfer data that change both rarely and frequently.
+<a href="http://streamdata.io" target="_blank">Streamdata.io</a> is a real-time data distribution platform that allows you to either poll a Rest API or push messages directly from your backend. Streamdata.io enables you to delegate the complexity of real-time data push while dramatically reducing bandwidth consumption through incremental data streaming.
+Go beyond the traditional request/response mechanism and the limits that come with this approach.
+Streamdata.io uses Server-Sent-Events in order to provide its push feature.
+Instead of requesting data every time, the client subscribes to receive real-time updates coming from the server in an automated fashion.
 
 ## Features
 
-* Incremental data update: replacing polling by push is not enough to minimize data streams. That's why streamdata.io pushes only the part that has changed.
-* <a href="http://www.w3.org/TR/eventsource/" target="_blank">Server-Sent-Events (SSE)</a>: updates are pushed to the client using SSE protocol. By providing fallback mechanisms streamdata.io can also work with older browsers.
-* API Cache: to reduce server load and latency, streamdata.io has an integrated cache mechanism.
-
-
-This Javascript SDK facilitates the usage of streamdata.io.
+* **Push**: Updates are pushed to the client using <a href="http://www.w3schools.com/html/html5_serversentevents.asp" target="_blank">Server-Sent Events</a> (SSE). By providing fallback mechanisms, Streamdata.io can also work with older browsers.
+* **Incremental updates**: Replacing polling by push is not enough to minimize data streams. That's why Streamdata.io only pushes the part of data that has changed thanks to <a href="http://jsonpatch.com/" target="_blank">JSON Patch</a>.
+* **Cache**: To reduce server load and latency, Streamdata.io relies on an In-memory Data Grid to efficiently cache data across its cluster.
 
 Follow this quick start guide to easily integrate streamdata.io into your application.
 
@@ -36,12 +35,12 @@ Having node.js and npm installed on your computer.
 Then check out the project from git and simply run the following command lines to build the sdk file from source:
 
 ```
-npm install 
+yarn install 
 ```
 This will install npm components for the build.
 
 ```
-npm run build
+yarn build
 ```
 The result of this will be available in the dist/ folder :
   * dist/bundles
@@ -61,6 +60,12 @@ The result of this will be available in the dist/ folder :
 The streamdataio-js-sdk is available through a npm package.
 
 You can install it through the following command line :
+
+```
+yarn install streamdataio-js-sdk
+```
+
+Or with NPM :
 
 ```
 npm install streamdataio-js-sdk --save
@@ -91,13 +96,17 @@ By doing this, you access in your JavaScript code to the ```streamdataio``` obje
 
 ## 3. Use streamdata.io to connect to your API
 
-Create a ```StreamDataEventSource``` object into your JavaScript code.
+### 3.1 Streamdata Proxy version 1
+
+```/!\ DEPRECATED /!\ ``` This method has been deprecated since version 2.1.0 of this SDK.
+
+Create a ```StreamdataEventSource``` object into your JavaScript code.
 
 ```javascript
     var myEvent = streamdataio.createEventSource("http://mysite.com/myRestService",<app_token>);
 ```
 
-The ```StreamDataEventSource``` is the entry point for establishing a data stream connection to the given URL.
+The ```StreamdataEventSource``` is the entry point for establishing a data stream connection to the given URL.
 
 It uses an application **token** to identify and authorize the stream connection to be established.
 
@@ -124,21 +133,43 @@ Here is an example to add a Basic authorization header to your target API call:
     // add whatever header required by your API
     var headers = ['Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='];
 
-    var myEventSource = streamdataio.createEventSource(url,<app_token>, headers);
+    var myEventSource = streamdataio.createEventSource(url, <app_token>, headers);
 ```
+
+### 3.1 Streamdata Proxy version 2
+
+Depending on your needs, we will create either a ```StreamdataUrlSubscriber``` for auto-provisionning topic (like in v1)
+ 
+```javascript
+    var mySubscriber = streamdataio.subscribeToUrl("http://mysite.com/myRestService",<subscriber_key>);
+```
+ 
+or a ```StreamdataTopicSubscriber``` to subscribe to an existing topic using its id.
+
+```javascript
+    var mySubscriber = streamdataio.subscribeToTopic(<topic_id>, <subscriber_key>);
+```
+
+The ```StreamdataProxySubscriber``` is the entry point for establishing a data stream connection.
+
+It uses an application **subscriber key** to identify and authorize the stream connection to be established.
+
+To get a valid **subscriber key**, please visit <a href="http://streamdata.io" target="_blank">streamdata.io web site</a> to register and create an application.
+
+It uses standard HTTP Server-Sent Events to get the data you required through streamdata.io proxy.
 
 ## 4. Handle data reception
 
 streamdata.io SDK handles data from the targeted REST service as JSON objects.
 
-When the ```StreamDataEventSource``` object is opened, the initial set of data is returned as it would be with a standard call to the service URL. This data set is called the **snapshot**. The SDK returns it through the ```onData``` callback.
+When the ```EventSource``` object is opened, the initial set of data is returned as it would be with a standard call to the service URL. This data set is called the **snapshot**. The SDK returns it through the ```onData``` callback.
 
 The updates of this initial set will come subsequently in the <a href="http://jsonpatch.com/" target="_blank">JSON-Patch</a> format through the ```onPatch``` callback. Such a data update is called a **patch**.
 
 You can define your callback functions as follows:
 
 ```javascript
-    myEventSource.onData(function(data){
+    mySubscriber.onData(function(data){
         // initialize your data with the initial snapshot
     }).onPatch(function(patch){
         // update the data with the provided patch
@@ -152,7 +183,7 @@ You can define your callback functions as follows:
 ## 5. Start receiving data
 
 ```javascript
-    myEventSource.open();
+    mySubscriber.open();
 ```
 
 Examples
@@ -176,17 +207,17 @@ Each callback will be described in further details in the Public API JavaScript 
 
 <script>
 (function() {
-  var eventSource = null;
+  var subscriber = null;
   var stocks = [];
 
   function connect() {
-    // REPLACE WITH YOUR OWN TOKEN HERE
-    var appToken = "NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1";
+    // REPLACE WITH YOUR OWN SUBSCRIBER KEY HERE
+    var subscriberKey = "NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1";
 
     // create the StreamdataEventSource Object
-    eventSource = streamdataio.createEventSource("http://myRestservice.com/stocks", appToken);
+    subscriber = streamdataio.subscribeToUrl("http://myRestservice.com/stocks", subscriberKey);
 
-    eventSource
+    subscriber
      .onOpen(function() {
        console.log("streamdata Event Source connected.")
      })
@@ -205,14 +236,14 @@ Each callback will be described in further details in the Public API JavaScript 
      });
 
     // open the data stream to the REST service through streamdata.io proxy
-    eventSource.open();
+    subscriber.open();
 
   };
 
   function disconnect() {
-    if (eventSource) {
-      eventSource.close();
-      eventSource = null;
+    if (subscriber) {
+      subscriber.close();
+      subscriber = null;
     }
   };
 
@@ -262,6 +293,7 @@ Security
 ========
 
 ## 1. TLS Encryption
+
 streamdata.io proxy uses Transport Layer Security (TLS) as a default to encrypt messages while in transport across the Internet.
 
 **Recommendation**:
@@ -274,18 +306,20 @@ Using TLS ensures that client messages are protected when being sent to and from
 
 Running an application in production through streamdata.io proxy requires an authentication mechanism.
 
-When registering on <a href="http://streamdata.io" target="_blank">streamdata.io web site</a>, you'll be provided with a unique **token** for your application and a **private key**.
+When registering on <a href="http://streamdata.io" target="_blank">streamdata.io web site</a>, you'll be provided with a unique **subscriber key** for your application and a **private key**.
 
 This allows streamdata.io proxy to identify that a specific request comes from your application.
 
-This **token** must be provided to the SDK in order to be able to use the streamdata.io proxy.
+This **subscriber key** must be provided to the SDK in order to be able to use the streamdata.io proxy.
 
 ```javascript
-    var appToken = "NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1";
-    var myEventSource = streamdataio.createEventSource("http://mysite.com/myJsonRestService", appToken);
+    var subscriberKey = "NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1";
+    var subscriber = streamdataio.subscribeToUrl("http://myRestservice.com/stocks", subscriberKey);
 ```
 
 ## 3. Authentication with signature
+
+```/!\ NOT SUPPORTED IN V2 /!\ ```
 
 streamdata.io SDK offers an optional Hash-based Message Authentication (HMAC) mechanism to enhance your requests security.
 
@@ -305,7 +339,7 @@ This auth javascript library is available :
 npm install streamdataio-js-sdk-auth
 ```
 
-You can then use a signatureStrategy object when creating your StreamDataEventSource as follow:
+You can then use a signatureStrategy object when creating your StreamdataEventSource as follow:
 
 
 ```javascript
@@ -314,7 +348,7 @@ You can then use a signatureStrategy object when creating your StreamDataEventSo
     // setup signatureStrategy
     var signatureStrategy = AuthStrategy.newSignatureStrategy("NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1","NTEtMTQxNiWIzMDEC00OWNlLThmNGYtY2ExMDJxO00NzNhLTgtZWY0MjOTc2YmUxODFiZDU1NmU0ZDAtYWU5NjYxMGYzNDdi");
     // instantiate an eventSource
-    var eventSource = streamdataio.createEventSource("http://myRestservice.com/stocks","NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1",headers,signatureStrategy);
+    var eventSource = streamdataio.createEventSource("http://myRestservice.com/stocks","NmEtYTljN2UtYmM1MGZlMGRiNGFQzYS00MGRkLTkNTZlMDY1", headers, signatureStrategy);
 ```
 
 

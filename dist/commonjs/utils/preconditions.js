@@ -30,7 +30,7 @@ var Preconditions = /** @class */ (function () {
     Preconditions.deprecated = function (functionName, message) {
         this.checkNotNull(functionName, 'functionName cannot be null');
         this.checkNotNull(message, 'message cannot be null');
-        logger_1.Logger.warn('\'{0}\' is deprecated because \'{1}\'.', functionName, message);
+        logger_1.Logger.warn('\'{0}\' is deprecated. \'{1}\'.', functionName, message);
     };
     /**
      * @memberOf Preconditions#
