@@ -59,7 +59,7 @@
     "tslint-loader": "^3.5.3",
     "typedoc": "^0.9.0",
     "typescript": "^2.3.4",
-    "webpack": "^2.6.1",
+    "webpack": "^5.75.0",
     "webpack-dev-server": "^2.4.5",
     "webpack-merge": "^4.1.0",
     "webpack-node-externals": "^1.6.0"
